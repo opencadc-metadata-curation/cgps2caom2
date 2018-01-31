@@ -1,0 +1,78 @@
+SIMPLE  =                    T / file does conform to FITS standard             
+BITPIX  =                  -32 / number of bits per data pixel                  
+NAXIS   =                    4 / number of data axes                            
+NAXIS1  =                 1024 / length of data axis 1                          
+NAXIS2  =                 1024 / length of data axis 2                          
+NAXIS3  =                    1 / length of data axis 3                          
+NAXIS4  =                    1 / length of data axis 4                          
+EXTEND  =                    T / FITS dataset may contain extensions            
+COMMENT   FITS (Flexible Image Transport System) format defined in Astronomy and
+COMMENT   Astrophysics Supplement Series v44/p363, v44/p371, v73/p359, v73/p365.
+COMMENT   Contact the NASA Science Office of Standards and Technology for the   
+COMMENT   FITS Definition document #100 and other FITS information.             
+DATE-FTS= '2000-11-09'         / DATE OF FITS FILE CREATION                     
+OBJECT  = 'CGPS Mosaic MD1'    / OBJECT NAME                                    
+ADC_ARCH= 'CGPS    '           / DATA CENTRE ARCHIVE                            
+ADC_TYPE= 'MOSAIC  '           / TYPE OF IMAGE: FIELD/MOSAIC                    
+ADC_AREA= 'MD1     '           / IMAGE AREA CODE                                
+IMAG_DES= '100-um Intensity'   / IMAGE DESCRIPTION                              
+ADC_BAND= '100     '           / SPECTRAL BAND                                  
+ADC_UNIT= 'um      '           / BAND UNITS, OR DESCRIPTOR                      
+ADC_POLR= '        '           / STOKES CODE, BLANK = VARIOUS                   
+ADC_QUAL= 'image   '           / IMAGE-TYPE QUALIFIER                           
+ORIGIN  = 'CGPS Consortium'    / FITS WRITING INSTITUTION                       
+INSTRUME= 'IPAC HIRES'         / DATA ACQUISITION INSTRUMENT                    
+OBSERVER= 'CGPS Consortium'    / OBSERVER NAME/ID                               
+DATE-OBS= '1998-01-01'         / MEAN DATE OF OBSERVATION                       
+DATE-GPS= '2000-01-01'         / DATE OF RELEASE TO CGPS CONSORTIUM             
+PUB_RELD= '2000-01-01'         / PUBLIC RELEASE DATE                            
+BUNIT   = 'MJY/STER'           / BRIGHTNESS UNITS                               
+OBSFREQ =   2.997924572431E+12 / OBSERVING FREQUENCY (HZ)                       
+CTYPE1  = 'GLON-CAR'           / X COORDINATE TYPE                              
+CRVAL1  =   1.167499990956E+02 / REF. X COORD. VALUE (DEG)                      
+CRPIX1  =               513.00 / REF. X PIXEL                                   
+CDELT1  =       -4.9999994E-03 / DELTA X (DEG)                                  
+CROTA1  =                 0.00 / X ROTATION ANGLE (DEG)                         
+CTYPE2  = 'GLAT-CAR'           / Y COORDINATE TYPE                              
+CRVAL2  =  -9.999999922536E-01 / REF. Y COORD. VALUE (DEG)                      
+CRPIX2  =               513.00 / REF. Y PIXEL                                   
+CDELT2  =        4.9999994E-03 / DELTA Y (DEG)                                  
+CROTA2  =                 0.00 / Y ROTATION ANGLE (DEG)                         
+CTYPE3  = 'LAMBDA  '           / Z COORDINATE TYPE                              
+CRVAL3  =   1.000000000000E-04 / Z REF. WAVELENGTH (M)                          
+CRPIX3  =                 1.00 / REF. Z PIXEL                                   
+CDELT3  =        1.0000000E+00 / DELTA Z                                        
+CROTA3  =                 0.00 / Z ROTATION ANGLE (DEG)                         
+CTYPE4  = 'STOKES  '           / 4TH COORDINATE TYPE                            
+CRVAL4  =   1.000000000000E+00 / REF. COORD. 1-4=I,Q,U,V                        
+CRPIX4  =                 1.00 / REF. PIXEL                                     
+CDELT4  =        1.0000000E+00 / DELTA COORD.                                   
+CROTA4  =                 0.00 / ROTATION ANGLE (DEG)                           
+DATAMIN =        3.0683233E+01 / MINIMUM PIXEL VALUE                            
+DATAMAX =        3.2335486E+03 / MAXIMUM PIXEL VALUE                            
+MINCOL  =                  224 / COLUMN POSITION OF MIN VALUE                   
+MAXCOL  =                  957 / COLUMN POSITION OF MAX VALUE                   
+MINROW  =                  962 / ROW POSITION OF MIN VALUE                      
+MAXROW  =                  606 / ROW POSITION OF MAX VALUE                      
+HISTORY   >                                                                     
+HISTORY   General information on the CGPS may be obtained from the CGPS public  
+HISTORY   web site http://www.ras.ucalgary.ca/CGPS and queries regarding the    
+HISTORY   CGPS or its data may be addressed to cgps@ras.ucalgary.ca .           
+HISTORY   >                                                                     
+HISTORY   More detailed comments regarding the data in this FITS file may be    
+HISTORY   found in a "readme" file which accompanies this data release.         
+HISTORY   ********************************************************************* 
+HISTORY   >                                                                     
+HISTORY   The file definition included the comment:                             
+HISTORY   OBJECT = CGPS Mosaic MD1 100 micron img                               
+HISTORY   >                                                                     
+HISTORY   >                                                                     
+HISTORY   A detailed discussion of the characteristics of the HIRES             
+HISTORY   images and ancillary maps contained in the CGPS can be                
+HISTORY   found in: Cao et al. (1997), ApJS, 111, 387 (60 and 100               
+HISTORY   micron data), and in: Kerton and Martin (2000), ApJS, 126,            
+HISTORY   85 (12 and 25 micron data). Users are encouraged to read              
+HISTORY   these papers in order to make the best use of the data.               
+CHECKSUM= 'DaadDTRcDZXcDZXc'   / encoded HDU checksum updated on 09/11/00       
+DATASUM = '2588809790'         / data unit checksum updated on 09/11/00         
+END                                                                             
