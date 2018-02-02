@@ -4,17 +4,19 @@ from __future__ import (absolute_import, division, print_function,
 from astropy.io import fits
 
 from cgps2caom2 import main_app, draw_cgps_blueprint
+from caom2 import ObservationReader
+from caom2.diff import get_differences
+
+import os
+import pytest
+import sys
+
 
 TEST_URI = 'ad:CGPS/CGPS_MC2_1420_MHz_I_image.fits'
 TEST_URI_FHWM = 'ad:CGPS/CGPS_MD1_100_um_fwhm.txt'
 
-EXPECTED_CGPS_BLUEPRINT = '''
-'''
-
-
-# def test_main_app():
-#     test_result = main_app()
-#     assert repr(test_result) == EXPECTED_CGPS_BLUEPRINT
+THIS_DIR = os.path.dirname(os.path.realpath(__file__))
+TESTDATA_DIR = os.path.join(THIS_DIR, 'data')
 
 
 def test_draw():
@@ -27,9 +29,37 @@ def test_draw():
     assert test_blueprint._plan['Chunk.energy.specsys'] == 'TOPOCENT'
     assert test_blueprint._plan['Chunk.position.axis.axis1.cunit'] == 'deg'
     assert test_blueprint._plan['Chunk.polarization.axis.function.delta'] == '1'
-    assert test_blueprint._plan['Chunk.energy.restfrq'] == '1420406000.0'
+    assert test_blueprint._plan['Chunk.energy.restfrq'] == (['OBSFREQ'], None)
+    assert test_blueprint._plan['Observation.intent'] == 'science'
+    assert test_blueprint._plan['Plane.provenance.lastExecuted'] == (
+    ['DATE-FTS'], None)
 
     test_blueprint = draw_cgps_blueprint(TEST_URI_FHWM, [])
     assert test_blueprint is not None
     assert test_blueprint._plan['Plane.productID'] == 'catalog'
     assert test_blueprint._plan['Artifact.productType'] == 'science'
+
+
+# @pytest.mark.parametrize('test_name', ['MC2_DRAO-ST', 'MC2_FCRAO', 'MD1_IRAS'])
+@pytest.mark.parametrize('test_name', ['MD1_IRAS'])
+def test_main_app(test_name):
+    location = os.path.join(TESTDATA_DIR, test_name)
+    actual_file_name = os.path.join(location, '{}.out'.format(test_name))
+    uris = ' '.join(
+        [os.path.join(location, name) for name in os.listdir(location) if
+         name.endswith('header')])
+    sys.argv = ('cgps2caom2 --debug --observation CGPS {} -o {} {}'.format(
+        test_name, actual_file_name, uris)).split()
+    main_app()
+    expected = _read_obs(os.path.join(location, '{}.xml'.format(test_name)))
+    actual = _read_obs(actual_file_name)
+    result = get_differences(expected, actual, 'Observation')
+    print('\n'.join(str(p) for p in result))
+    assert len(result) == 0
+
+
+def _read_obs(fname):
+    assert os.path.exists(fname)
+    reader = ObservationReader(False)
+    result = reader.read(fname)
+    return result

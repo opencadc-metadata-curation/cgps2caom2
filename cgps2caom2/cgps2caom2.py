@@ -4,13 +4,17 @@ from __future__ import (absolute_import, division, print_function,
 
 __all__ = ['main_app', 'draw_cgps_blueprint']
 
+from astropy.io import fits
+
 from . import version
-from caom2 import CalibrationLevel
+from caom2 import CalibrationLevel, ObservationWriter, SimpleObservation
+from caom2 import Algorithm, ReleaseType
 from caom2utils import ObsBlueprint, FitsParser
 
 import argparse
 import logging
 import math
+import os
 import re
 import sys
 
@@ -252,6 +256,7 @@ def _metadata_from(bp, headers, uri):
     print('telescope {} target {} product id {} bandpass name {} content {}'.
           format(telescope, target, product_id, bandpass_name, content))
     bp.set('Plane.productID', product_id)
+    bp.set('Artifact.releaseType', ReleaseType.DATA)
 
     # Deal with FITS files first
     if isinstance(headers, list) and  len(headers) > 0 and 'INSTRUME' in headers[0]:
@@ -320,7 +325,7 @@ def _metadata_from(bp, headers, uri):
 
                 # Artifact-level metadata (plus a few plane-level metadata
                 # that can only be determined from the science artifacts)
-                bp.configure_position_axes((1,2))
+                bp.configure_position_axes((1, 2))
                 bp.configure_energy_axis(3)
                 _set_fits(bp, ENERGY[product_id])
                 if collection == 'CGPS':
@@ -335,9 +340,9 @@ def _metadata_from(bp, headers, uri):
                     _set_fits(bp, POLARIZATION)
 
                 if telescope in ('DRAO-ST', 'FCRAO'):
-                    bp.set('Chunk.energy.restfrq', hdu0.get('OBSFREQ'))
+                    bp.set_fits_attribute('Chunk.energy.restfrq', ['OBSFREQ'])
                 elif telescope == 'VLA':
-                    bp.set('Chunk.energy.restfrq', hdu0.get('FREQ0'))
+                    bp.set_fits_attribute('Chunk.energy.restfrq', ['FREQ0'])
                 bp.set('Chunk.energy.bandpassName', bandpass_name)
 
                 # Determine the data product type from the axis count
@@ -381,7 +386,6 @@ def _metadata_from(bp, headers, uri):
         #         'For {} the image file {} has not already been ingested'.format(
         #             file_id, image_file_id))
         #
-        # # TODO how to set collection - self.collection = coll
         # bp.set('Observation.observationID', obs)
         #
         # for item in ['obs.metaRelease',
@@ -408,12 +412,44 @@ def _metadata_from(bp, headers, uri):
         # inputURI = self.planeURI(coll, obs, prod)
 
 
+def _set_defaults_and_overrides(bp):
+    # from the cgps.config file
+    bp.set_fits_attribute('Plane.provenance.lastExecuted', ['DATE-FTS'])
+    # from the cgps.default file
+    bp.set_default('Observation.target.type', 'field')
+    bp.set_default('Plane.provenance.project', 'CGPS')
+    bp.set_default('Chunk.position.axis.axis1.cunit', 'deg')
+    bp.set_default('Chunk.position.axis.axis2.cunit', 'deg')
+    bp.set_default('Observation.intent', 'science')
+    # from the cgps.defaults file - TODO - don't know what CAOM2 elements the
+    # values in this file map to
+    # bp.set_default('target.classification', 'FIELD')
+    # bp.set_default('process.version', '1')
+    # bp.set_default('process.out.version', '1')
+
+
+def _get_headers(fname):
+    f = open(fname)
+    content = '\n'.join(f.readlines())
+    f.close()
+    delim = '\nEND'
+    extensions = [e + delim for e in content.split(delim) if e.strip()]
+    headers = [fits.Header.fromstring(e, sep='\n') for e in extensions]
+    return headers
+
+
+def _get_uri(collection, fname):
+    """This really shouldn't last."""
+    basename = os.path.basename(fname).split('.header')[0]
+    return 'ad:{}/{}'.format(collection, basename)
+
 
 def draw_cgps_blueprint(uri, headers):
     logging.debug('Begin blueprint customization for CGPS {}.'.format(uri))
     blueprint = ObsBlueprint()
 
     _metadata_from(blueprint, headers, uri)
+    _set_defaults_and_overrides(blueprint)
 
     logging.debug('Blueprint customatization complete for CGPS {}.'.format(uri))
     return blueprint
@@ -456,10 +492,6 @@ def main_app():
                           help='observation in a collection',
                           metavar=('collection', 'observationID'))
 
-    parser.add_argument('--config', required=False,
-                        help=('optional CAOM2 utype to keyword config file to '
-                              'merge with the internal configuration'))
-
     parser.add_argument('--log', help='log file name > (instead of console)')
     parser.add_argument('--keep', action='store_true',
                         help='keep the locally stored files after ingestion')
@@ -487,7 +519,30 @@ def main_app():
     else:
         logging.basicConfig(level=logging.WARN, stream=sys.stdout)
 
-    logging.debug('Begin blueprint construction for CGPS {}.'.format('uri'))
-    blueprint = ObsBlueprint()
-    logging.debug('Blueprint construction completed for CGPS.'.format('uri'))
-    return blueprint
+    observation = SimpleObservation(collection=args.observation[0],
+                                    observation_id=args.observation[1],
+                                    algorithm=Algorithm('exposure'))
+    for i, file_name in enumerate(args.fileURI):
+        logging.debug('Begin processing for {}'.format(file_name))
+        headers = _get_headers(file_name)
+        # uri = 'ad:{}/{}'.format(args.observation[0], file_name)
+        uri = _get_uri(args.observation[0], file_name)
+        print('processing for uri {}'.format(uri))
+        blueprint = draw_cgps_blueprint(uri, headers)
+        parser = FitsParser(headers)
+        # parser.logger.setLevel(logging.DEBUG)
+        parser.blueprint = blueprint
+        product_id = blueprint._get('Plane.productID')
+        parser.augment_observation(observation=observation,
+                                   artifact_uri=uri,
+                                   product_id=blueprint._get(
+                                       'Plane.productID'))
+        print('length planes is {}'.format(len(observation.planes)))
+        print('length artifacts is {}'.format(
+            len(observation.planes[product_id].artifacts)))
+
+    if args.out_obs_xml:
+        writer = ObservationWriter()
+        writer.write(observation, args.out_obs_xml)
+
+    logging.debug('Done processing for {}'.format(args.observation[1]))
