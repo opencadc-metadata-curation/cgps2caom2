@@ -43,13 +43,14 @@ def test_draw():
 # @pytest.mark.parametrize('test_name', ['MC2_DRAO-ST', 'MC2_FCRAO', 'MD1_IRAS'])
 @pytest.mark.parametrize('test_name', ['MD1_IRAS'])
 def test_main_app(test_name):
+    product_id = 'ignored_product_id'
     location = os.path.join(TESTDATA_DIR, test_name)
     actual_file_name = os.path.join(location, '{}.out'.format(test_name))
     uris = ' '.join(
         [os.path.join(location, name) for name in os.listdir(location) if
          name.endswith('header')])
-    sys.argv = ('cgps2caom2 --debug --observation CGPS {} -o {} {}'.format(
-        test_name, actual_file_name, uris)).split()
+    sys.argv = ('cgps2caom2 --debug --observation CGPS {} -o {} {} {}'.format(
+        test_name, actual_file_name, product_id, uris)).split()
     main_app()
     expected = _read_obs(os.path.join(location, '{}.xml'.format(test_name)))
     actual = _read_obs(actual_file_name)

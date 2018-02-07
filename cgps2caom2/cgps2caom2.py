@@ -9,7 +9,7 @@ from astropy.io import fits
 from . import version
 from caom2 import CalibrationLevel, ObservationWriter, SimpleObservation
 from caom2 import Algorithm, ReleaseType
-from caom2utils import ObsBlueprint, FitsParser
+from caom2utils import ObsBlueprint, FitsParser, POLARIZATION_CTYPES
 
 import argparse
 import logging
@@ -20,6 +20,14 @@ import sys
 
 
 APP_NAME = 'cgps2caom2'
+
+# Content explanation:
+#
+# Take what Russell Redmond write, and apply it to the python version of
+# fits2caom2.
+#
+# Differences in handling - the Java version resulted in an 'Observable'
+
 
 # Regular expressions for file_ids.  Note that these are all in lower
 # case as are CGPS file_ids, not mixed case as are CGPS file names.  The
@@ -198,7 +206,7 @@ LOCATIONS = {'IRAS': ('', '', ''),
 def _cgps_make_file_id(basename):
     """
     CGPS-specific routine to convert a file basename (without the
-    directory path) to the corressponding file_id used in AD.
+    directory path) to the corresponding file_id used in AD.
 
     Arguments:
     basename : a file name without the directory path
@@ -316,34 +324,39 @@ def _metadata_from(bp, headers, uri):
             bp.set('Plane.provenance.producer', producer)
             bp.set('Plane.provenance.reference', REFERENCE[collection])
 
-            # bp.set('Artifact.uri', uri)
+            # Artifact-level metadata (plus a few plane-level metadata
+            # that can only be determined from the science artifacts)
+
+            bp.configure_position_axes((1, 2))
+            print('collection is {}'.format(collection))
+            if content == 'image':
+                bp.configure_energy_axis(3)
+                _set_fits(bp, ENERGY[product_id])
+
+            if collection == 'CGPS':
+                if content == 'image':
+                    bp.configure_polarization_axis(4)
+                    _set_fits(bp, POLARIZATION)
+                    if product_id == '1420MHz-QU':
+                        crval4 = '%d' % (int(math.floor(hdu0.get('CRVAL4'))))
+                        _set_fits(bp, {'CRVAL4': crval4})
+                elif content == 'phn' and hdu0.get(
+                        'CTYPE4') in POLARIZATION_CTYPES:  # TODO SGo
+                    bp.configure_polarization_axis(4)
+            elif collection == 'VGPS':
+                bp.configure_polarization_axis(4)
+                _set_fits(bp, POLARIZATION)
+
+            if telescope in ('DRAO-ST', 'FCRAO'):
+                bp.set_fits_attribute('Chunk.energy.restfrq', ['OBSFREQ'])
+            elif telescope == 'VLA':
+                bp.set_fits_attribute('Chunk.energy.restfrq', ['FREQ0'])
+            bp.set('Chunk.energy.bandpassName', bandpass_name)
 
             if collection == 'VGPS' or content == 'image':
                 product_type = 'science'
 
                 # WCS is only significant for science artifacts
-
-                # Artifact-level metadata (plus a few plane-level metadata
-                # that can only be determined from the science artifacts)
-                bp.configure_position_axes((1, 2))
-                bp.configure_energy_axis(3)
-                _set_fits(bp, ENERGY[product_id])
-                if collection == 'CGPS':
-                    if content == 'image':
-                        bp.configure_polarization_axis(4)
-                        _set_fits(bp, POLARIZATION)
-                        if product_id == '1420MHz-QU':
-                            crval4 = '%d' % (int(math.floor(hdu0.get('CRVAL4'))))
-                            _set_fits(bp, {'CRVAL4': crval4})
-                elif collection == 'VGPS':
-                    bp.configure_polarization_axis(4)
-                    _set_fits(bp, POLARIZATION)
-
-                if telescope in ('DRAO-ST', 'FCRAO'):
-                    bp.set_fits_attribute('Chunk.energy.restfrq', ['OBSFREQ'])
-                elif telescope == 'VLA':
-                    bp.set_fits_attribute('Chunk.energy.restfrq', ['FREQ0'])
-                bp.set('Chunk.energy.bandpassName', bandpass_name)
 
                 # Determine the data product type from the axis count
                 # Beware that content=image parsed from the file_id does
@@ -365,6 +378,13 @@ def _metadata_from(bp, headers, uri):
             else:
                 product_type = 'auxiliary'
             bp.set('Artifact.productType', product_type)
+
+            # Per Pat Dowler/Chris Willot Feb 2/17, ignore the third and
+            # fourth axes if they are not correctly WCS, and repair naxes
+            # count accordingly.
+            #
+            print('configed axis is {}'.format(bp.get_configed_axes_count()))
+            bp.set('Chunk.naxis', bp.get_configed_axes_count())
 
     elif content == 'fwhm':
         # fwhm files are text files without FITS headers,
@@ -532,14 +552,16 @@ def main_app():
         parser = FitsParser(headers)
         # parser.logger.setLevel(logging.DEBUG)
         parser.blueprint = blueprint
+        parser.apply_config_to_fits()
         product_id = blueprint._get('Plane.productID')
+        # print(repr(blueprint._plan))
         parser.augment_observation(observation=observation,
                                    artifact_uri=uri,
                                    product_id=blueprint._get(
                                        'Plane.productID'))
-        print('length planes is {}'.format(len(observation.planes)))
-        print('length artifacts is {}'.format(
-            len(observation.planes[product_id].artifacts)))
+        # if file_name.find('_phn') != -1:
+        #     print(repr(blueprint._plan))
+        #     break
 
     if args.out_obs_xml:
         writer = ObservationWriter()
