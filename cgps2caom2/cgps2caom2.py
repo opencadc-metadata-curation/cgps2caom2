@@ -8,7 +8,7 @@ from astropy.io import fits
 
 from . import version
 from caom2 import CalibrationLevel, ObservationWriter, SimpleObservation
-from caom2 import Algorithm, ReleaseType
+from caom2 import Algorithm, ReleaseType, DataProductType
 from caom2utils import ObsBlueprint, FitsParser, POLARIZATION_CTYPES
 
 import argparse
@@ -21,9 +21,12 @@ import sys
 
 APP_NAME = 'cgps2caom2'
 
+catalog_blueprint = ObsBlueprint()
+catalog_uri = ''
+
 # Content explanation:
 #
-# Take what Russell Redmond write, and apply it to the python version of
+# Take what Russell Redmond wrote, and apply it to the python version of
 # fits2caom2.
 #
 # Differences in handling - the Java version resulted in an 'Observable'
@@ -221,12 +224,66 @@ def _cgps_make_file_id(basename):
     return file_id
 
 
+def _set_common(bp, headers, telescope, target, collection):
+    bp.set('Observation.observationID',
+           '{}_{}'.format(target, telescope).upper())
+    catalog_blueprint.set('Observation.observationID',
+                          '{}_{}'.format(target, telescope).upper())
+
+    geo_x, geo_y, geo_z = LOCATIONS[telescope]
+    bp.set('Observation.telescope.name', telescope)
+    bp.set('Observation.telescope.geoLocationX', geo_x)
+    bp.set('Observation.telescope.geoLocationY', geo_y)
+    bp.set('Observation.telescope.geoLocationZ', geo_z)
+    bp.set('Observation.target.name', target)
+    catalog_blueprint.set('Observation.telescope.name', telescope)
+    catalog_blueprint.set('Observation.telescope.geoLocationX', geo_x)
+    catalog_blueprint.set('Observation.telescope.geoLocationY', geo_y)
+    catalog_blueprint.set('Observation.telescope.geoLocationZ', geo_z)
+    catalog_blueprint.set('Observation.target.name', target)
+    if collection == 'CGPS':
+        release = headers[0].get('PUB_RELD')
+    else:
+        release = headers[0].get('DATE-OBS')
+
+    bp.set('Observation.metaRelease', release)
+    bp.set('Plane.metaRelease', release)
+    bp.set('Plane.dataRelease', release)
+    bp.set('Plane.calibrationLevel', CalibrationLevel.CALIBRATED)
+
+    catalog_blueprint.set('Observation.metaRelease', release)
+    catalog_blueprint.set('Plane.metaRelease', release)
+    catalog_blueprint.set('Plane.dataRelease', release)
+    catalog_blueprint.set('Plane.calibrationLevel', CalibrationLevel.CALIBRATED)
+
+    if telescope in ('DRAO-ST', 'FCRAO'):
+        provenance_name = '{} {}'.format(headers[0].get('ADC_ARCH'),
+                                         headers[0].get('ADC_TYPE'))
+    elif telescope == 'IRAS':
+        provenance_name = 'CGPS MOSAIC HIRES'
+    else:
+        assert telescope == 'VLA'
+        provenance_name = headers[0].get('ORIGIN')
+    bp.set('Plane.provenance.name', provenance_name)
+    catalog_blueprint.set('Plane.provenance.name', provenance_name)
+
+    if collection == 'CGPS':
+        producer = headers[0].get('OBSERVER')
+    else:
+        producer = '"VLA Galactic Plane Survey (VGPS) Consortium"'
+
+    bp.set('Plane.provenance.producer', producer)
+    bp.set('Plane.provenance.reference', REFERENCE[collection])
+    catalog_blueprint.set('Plane.provenance.producer', producer)
+    catalog_blueprint.set('Plane.provenance.reference', REFERENCE[collection])
+
+
 def _set_fits(bp, lookup):
     for key, value in lookup.items():
         bp.set(key, value)
 
 
-def _metadata_from(bp, headers, uri):
+def _metadata_from(bp, headers, uri, file_name):
     """
     Archive-specific method to fill and return the plane and
     URI-specific dictionaries from the file header.
@@ -261,20 +318,21 @@ def _metadata_from(bp, headers, uri):
         bandpass_name = None
         content = None
 
-    print('telescope {} target {} product id {} bandpass name {} content {}'.
-          format(telescope, target, product_id, bandpass_name, content))
+    # print('telescope {} target {} product id {} bandpass name {} content {}'.
+    #       format(telescope, target, product_id, bandpass_name, content))
     bp.set('Plane.productID', product_id)
     bp.set('Artifact.releaseType', ReleaseType.DATA)
 
+    # Structural metadata
+    if telescope and telescope == 'VLA':
+        collection = 'VGPS'
+    else:
+        collection = 'CGPS'  # TODO how to set collection
+
     # Deal with FITS files first
-    if isinstance(headers, list) and  len(headers) > 0 and 'INSTRUME' in headers[0]:
+    if isinstance(headers, list) and len(headers) > 0 and 'INSTRUME' in headers[0]:
         hdu0 = headers[0]
         if telescope:
-            # Structural metadata
-            if telescope == 'VLA':
-                collection = 'VGPS'
-            else:
-                collection = 'CGPS'  # TODO how to set collection
 
             # For CGPS, it is better to take the target name from the
             # ADC_AREA header.  For VGPS, it is better to retain the
@@ -282,53 +340,15 @@ def _metadata_from(bp, headers, uri):
             if collection == 'CGPS':
                 target = hdu0.get('ADC_AREA')
 
-            bp.set('Observation.observationID',
-                   '{}_{}'.format(target, telescope))
-
-            # Fill the observation-level metadata
-            bp.set('Observation.target.name', target)
-            geo_x, geo_y, geo_z = LOCATIONS[telescope]
-            bp.set('Observation.telescope.name', telescope)
-            bp.set('Observation.telescope.geoLocationX', geo_x)
-            bp.set('Observation.telescope.geoLocationY', geo_y)
-            bp.set('Observation.telescope.geoLocationZ', geo_z)
+            _set_common(bp, headers, telescope, target, collection)
 
             bp.set('Observation.instrument.name', telescope)
-
-            # release dates
-            if collection == 'CGPS':
-                release = hdu0.get('PUB_RELD')
-            else:
-                release = hdu0.get('DATE-OBS')
-            bp.set('Observation.metaRelease', release)
-            bp.set('Plane.metaRelease', release)
-            bp.set('Plane.dataRelease', release)
-
-            # Plane-level metadata
-            bp.set('Plane.calibrationLevel', CalibrationLevel.CALIBRATED)
-
-            if telescope in ('DRAO-ST', 'FCRAO'):
-                provenance_name = '{} {}'.format(hdu0.get('ADC_ARCH'),
-                                                 hdu0.get('ADC_TYPE'))
-            elif telescope == 'IRAS':
-                provenance_name = 'CGPS MOSAIC HIRES'
-            else:
-                assert telescope == 'VLA'
-                provenance_name = hdu0.get('ORIGIN')
-            bp.set('Plane.provenance.name', provenance_name)
-
-            if collection == 'CGPS':
-                producer = hdu0.get('OBSERVER')
-            else:
-                producer = '"VLA Galactic Plane Survey (VGPS) Consortium"'
-            bp.set('Plane.provenance.producer', producer)
-            bp.set('Plane.provenance.reference', REFERENCE[collection])
+            catalog_blueprint.set('Observation.instrument.name', telescope)
 
             # Artifact-level metadata (plus a few plane-level metadata
             # that can only be determined from the science artifacts)
 
             bp.configure_position_axes((1, 2))
-            print('collection is {}'.format(collection))
             if content == 'image':
                 bp.configure_energy_axis(3)
                 _set_fits(bp, ENERGY[product_id])
@@ -341,7 +361,7 @@ def _metadata_from(bp, headers, uri):
                         crval4 = '%d' % (int(math.floor(hdu0.get('CRVAL4'))))
                         _set_fits(bp, {'CRVAL4': crval4})
                 elif content == 'phn' and hdu0.get(
-                        'CTYPE4') in POLARIZATION_CTYPES:  # TODO SGo
+                        'CTYPE4') in POLARIZATION_CTYPES:
                     bp.configure_polarization_axis(4)
             elif collection == 'VGPS':
                 bp.configure_polarization_axis(4)
@@ -383,53 +403,34 @@ def _metadata_from(bp, headers, uri):
             # fourth axes if they are not correctly WCS, and repair naxes
             # count accordingly.
             #
-            print('configed axis is {}'.format(bp.get_configed_axes_count()))
             bp.set('Chunk.naxis', bp.get_configed_axes_count())
 
     elif content == 'fwhm':
-        # fwhm files are text files without FITS headers,
-        # but the required metadata can be extracted from the corresponding
-        # image file.
+        global catalog_uri
+        catalog_uri = uri
+        bp.set('Plane.dataProductType', DataProductType.CATALOG)
         bp.set('Plane.productID', 'catalog')
+        catalog_blueprint.set('Plane.dataProductType', DataProductType.CATALOG)
+        catalog_blueprint.set('Plane.productID', 'catalog')
         bp.set('Artifact.productType', 'science')
 
-        # TODO this is all metadata that's been set for an image file that's
-        # part of the same observation - how to go about ingesting fwhm
-        # files in the correct order?
+        # fwhm files are text files without FITS headers,
+        # but the required metadata can be extracted from the corresponding
+        # image file
 
-        # image_file_id = _cgps_make_file_id(
-        #     re.sub(r'(.*?)_fwhm', r'\1_image', file_id))
-        # image_uri = 'ad:CGPS/{}'.format(image_file_id)
-        # coll, obs, prod = self.findURI(image_uri)
-        # if not coll:
-        #     logging.error(
-        #         'For {} the image file {} has not already been ingested'.format(
-        #             file_id, image_file_id))
-        #
-        # bp.set('Observation.observationID', obs)
-        #
-        # for item in ['obs.metaRelease',
-        #              'telescope.name',
-        #              'telescope.geoLocationX',
-        #              'telescope.geoLocationY',
-        #              'telescope.geoLocationZ',
-        #              'target.name',
-        #              'plane.metaRelease',
-        #              'plane.dataRelease',
-        #              'plane.calibrationLevel',
-        #              'provenance.name',
-        #              'provenance.producer',
-        #              'provenance.reference']:
-        #     value = self.get_plane_value(coll, obs, prod, item)
-        #     if isinstance(value, str):
-        #         self.add_to_plane_dict(item, value)
-        #     else:
-        #         self.log.console('item ' + item + ' not found for ' +
-        #                          imageURI,
-        #                          logging.ERROR)
-        #
-        # fileURI = self.fitsfileURI(self.archive, file_id)
-        # inputURI = self.planeURI(coll, obs, prod)
+        image_file_id = file_name.replace('_fwhm.txt', '_image.fits')
+        headers = _get_headers(image_file_id)
+        _set_common(bp, headers, telescope, target, collection)
+
+        plane_uri = 'caom:{}/{}/{}'.format(collection,
+                                           bp._get('Observation.observationID'),
+                                           product_id)
+        inputs = catalog_blueprint._get('Plane.provenance.inputs')
+        if inputs is None:
+            inputs = plane_uri
+        else:
+            inputs = '{} {}'.format(inputs, plane_uri)
+        catalog_blueprint.set('Plane.provenance.inputs', inputs)
 
 
 def _set_defaults_and_overrides(bp):
@@ -441,6 +442,8 @@ def _set_defaults_and_overrides(bp):
     bp.set_default('Chunk.position.axis.axis1.cunit', 'deg')
     bp.set_default('Chunk.position.axis.axis2.cunit', 'deg')
     bp.set_default('Observation.intent', 'science')
+    catalog_blueprint.set_default('Observation.target.type', 'field')
+    catalog_blueprint.set_default('Plane.provenance.project', 'CGPS')
     # from the cgps.defaults file - TODO - don't know what CAOM2 elements the
     # values in this file map to
     # bp.set_default('target.classification', 'FIELD')
@@ -449,13 +452,16 @@ def _set_defaults_and_overrides(bp):
 
 
 def _get_headers(fname):
-    f = open(fname)
-    content = '\n'.join(f.readlines())
-    f.close()
-    delim = '\nEND'
-    extensions = [e + delim for e in content.split(delim) if e.strip()]
-    headers = [fits.Header.fromstring(e, sep='\n') for e in extensions]
-    return headers
+    if fname.find('_fwhm') == -1:
+        f = open(fname)
+        content = '\n'.join(f.readlines())
+        f.close()
+        delim = '\nEND'
+        extensions = [e + delim for e in content.split(delim) if e.strip()]
+        headers = [fits.Header.fromstring(e, sep='\n') for e in extensions]
+        return headers
+    else:
+        return None
 
 
 def _get_uri(collection, fname):
@@ -464,11 +470,11 @@ def _get_uri(collection, fname):
     return 'ad:{}/{}'.format(collection, basename)
 
 
-def draw_cgps_blueprint(uri, headers):
+def draw_cgps_blueprint(uri, headers, file_name):
     logging.debug('Begin blueprint customization for CGPS {}.'.format(uri))
     blueprint = ObsBlueprint()
 
-    _metadata_from(blueprint, headers, uri)
+    _metadata_from(blueprint, headers, uri, file_name)
     _set_defaults_and_overrides(blueprint)
 
     logging.debug('Blueprint customatization complete for CGPS {}.'.format(uri))
@@ -545,23 +551,36 @@ def main_app():
     for i, file_name in enumerate(args.fileURI):
         logging.debug('Begin processing for {}'.format(file_name))
         headers = _get_headers(file_name)
+        # print(repr(headers))
         # uri = 'ad:{}/{}'.format(args.observation[0], file_name)
         uri = _get_uri(args.observation[0], file_name)
         print('processing for uri {}'.format(uri))
-        blueprint = draw_cgps_blueprint(uri, headers)
-        parser = FitsParser(headers)
-        # parser.logger.setLevel(logging.DEBUG)
-        parser.blueprint = blueprint
-        parser.apply_config_to_fits()
-        product_id = blueprint._get('Plane.productID')
+        blueprint = draw_cgps_blueprint(uri, headers, file_name)
+        if file_name.find('_fwhm') == -1:
+            fitsparser = FitsParser(headers)
+            fitsparser.blueprint = blueprint
+            fitsparser.apply_config_to_fits()
+        else:
+            fitsparser = FitsParser([])
+            fitsparser.blueprint = blueprint
         # print(repr(blueprint._plan))
-        parser.augment_observation(observation=observation,
-                                   artifact_uri=uri,
-                                   product_id=blueprint._get(
-                                       'Plane.productID'))
-        # if file_name.find('_phn') != -1:
-        #     print(repr(blueprint._plan))
+        # fitsparser.logger.setLevel(logging.DEBUG)
+        fitsparser.augment_observation(observation=observation,
+                                       artifact_uri=uri,
+                                       product_id=blueprint._get(
+                                           'Plane.productID'))
+        print('catalog uri is {}'.format(catalog_uri))
+
+    # if file_name.find('_fwhm') != -1:
         #     break
+
+    print('catalog uri is {}'.format(catalog_uri))
+    fitsparser = FitsParser([])
+    fitsparser.blueprint = catalog_blueprint
+    fitsparser.augment_observation(observation=observation,
+                                   artifact_uri=catalog_uri,
+                                   product_id=catalog_blueprint._get(
+                                       'Plane.productID'))
 
     if args.out_obs_xml:
         writer = ObservationWriter()
