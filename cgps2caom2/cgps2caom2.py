@@ -1,3 +1,6 @@
+# Original code by Russell Redmond, somewhat modified to work with
+# the python version of fits2caom2.
+
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
@@ -22,15 +25,7 @@ import sys
 APP_NAME = 'cgps2caom2'
 
 catalog_blueprint = ObsBlueprint()
-catalog_uri = ''
-
-# Content explanation:
-#
-# Take what Russell Redmond wrote, and apply it to the python version of
-# fits2caom2.
-#
-# Differences in handling - the Java version resulted in an 'Observable'
-
+catalog_uri = None
 
 # Regular expressions for file_ids.  Note that these are all in lower
 # case as are CGPS file_ids, not mixed case as are CGPS file names.  The
@@ -225,6 +220,10 @@ def _cgps_make_file_id(basename):
 
 
 def _set_common(bp, headers, telescope, target, collection):
+    """
+    Set the blueprint elements that are the same between
+    a catalog-based plane and other plane types.
+    """
     bp.set('Observation.observationID',
            '{}_{}'.format(target, telescope).upper())
     catalog_blueprint.set('Observation.observationID',
@@ -279,17 +278,25 @@ def _set_common(bp, headers, telescope, target, collection):
 
 
 def _set_fits(bp, lookup):
+    """
+    Override values for the blueprint are hard-coded in dictionaries. Set the
+    lookup values in the blueprint.
+    :param bp: Blueprint for modification.
+    :param lookup: Values with which to modify the blueprint.
+    """
     for key, value in lookup.items():
         bp.set(key, value)
 
 
 def _metadata_from(bp, headers, uri, file_name):
     """
-    Archive-specific method to fill and return the plane and
-    URI-specific dictionaries from the file header.
+    Archive-specific method to fill the blueprint from the file header.
 
     :param: bp blueprint
+    :param: headers Headers from a FITS file.
     :param: uri the ad (? TBC) URI for the header
+    :param: file_name The file name on disk - used to figure out the image
+    file paired with an fwhm file.
     """
 
     file_id = uri.split('/')[1]  # TODO get from header
@@ -359,7 +366,9 @@ def _metadata_from(bp, headers, uri, file_name):
                     _set_fits(bp, POLARIZATION)
                     if product_id == '1420MHz-QU':
                         crval4 = '%d' % (int(math.floor(hdu0.get('CRVAL4'))))
-                        _set_fits(bp, {'CRVAL4': crval4})
+                        _set_fits(bp, {
+                            'Chunk.polarization.axis.function.refCoord.val':
+                                crval4})
                 elif content == 'phn' and hdu0.get(
                         'CTYPE4') in POLARIZATION_CTYPES:
                     bp.configure_polarization_axis(4)
@@ -564,6 +573,7 @@ def main_app():
             fitsparser = FitsParser([])
             fitsparser.blueprint = blueprint
         # print(repr(blueprint._plan))
+        print('product id is {}'.format(blueprint._get('Plane.productID')))
         # fitsparser.logger.setLevel(logging.DEBUG)
         fitsparser.augment_observation(observation=observation,
                                        artifact_uri=uri,
@@ -574,13 +584,14 @@ def main_app():
     # if file_name.find('_fwhm') != -1:
         #     break
 
-    print('catalog uri is {}'.format(catalog_uri))
-    fitsparser = FitsParser([])
-    fitsparser.blueprint = catalog_blueprint
-    fitsparser.augment_observation(observation=observation,
-                                   artifact_uri=catalog_uri,
-                                   product_id=catalog_blueprint._get(
-                                       'Plane.productID'))
+    if catalog_uri is not None:
+        print('catalog uri is {}'.format(catalog_uri))
+        fitsparser = FitsParser([])
+        fitsparser.blueprint = catalog_blueprint
+        fitsparser.augment_observation(observation=observation,
+                                       artifact_uri=catalog_uri,
+                                       product_id=catalog_blueprint._get(
+                                           'Plane.productID'))
 
     if args.out_obs_xml:
         writer = ObservationWriter()
