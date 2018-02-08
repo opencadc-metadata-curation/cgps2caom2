@@ -23,7 +23,8 @@ def test_draw():
     hdr1 = fits.Header()
     hdr1['INSTRUME'] = 'TEST'
     hdr1['OBSFREQ'] = '1420406000.0'
-    test_blueprint = draw_cgps_blueprint(TEST_URI, [hdr1])
+    test_blueprint = draw_cgps_blueprint(TEST_URI, [hdr1], local=False,
+                                         cert=None)
     assert test_blueprint is not None
     assert test_blueprint._plan['Observation.telescope.name'] == 'DRAO-ST'
     assert test_blueprint._plan['Chunk.energy.specsys'] == 'TOPOCENT'
@@ -34,10 +35,12 @@ def test_draw():
     assert test_blueprint._plan['Plane.provenance.lastExecuted'] == (
     ['DATE-FTS'], None)
 
-    test_blueprint = draw_cgps_blueprint(TEST_URI_FHWM, [])
-    assert test_blueprint is not None
-    assert test_blueprint._plan['Plane.productID'] == 'catalog'
-    assert test_blueprint._plan['Artifact.productType'] == 'science'
+    # test_blueprint = draw_cgps_blueprint(
+    #     TEST_URI_FHWM, [], os.path.join(TESTDATA_DIR,
+    #                                     'CGPS_MD1_100_um_fwhm.txt.header'))
+    # assert test_blueprint is not None
+    # assert test_blueprint._plan['Plane.productID'] == 'catalog'
+    # assert test_blueprint._plan['Artifact.productType'] == 'science'
 
 
 # @pytest.mark.parametrize('test_name', ['MC2_DRAO-ST', 'MC2_FCRAO', 'MD1_IRAS'])
@@ -45,12 +48,16 @@ def test_draw():
 def test_main_app(test_name):
     product_id = 'ignored_product_id'
     location = os.path.join(TESTDATA_DIR, test_name)
-    actual_file_name = os.path.join(location, '{}.out'.format(test_name))
-    uris = ' '.join(
+    actual_file_name = os.path.join(location, '{}.actual.xml'.format(test_name))
+    files = ' '.join(
         [os.path.join(location, name) for name in os.listdir(location) if
          name.endswith('header')])
-    sys.argv = ('cgps2caom2 --debug --observation CGPS {} -o {} {} {}'.format(
-        test_name, actual_file_name, product_id, uris)).split()
+    uris = ' '.join(
+        ['ad:CGPS/{}'.format(name.split('.header')[0]) for name in
+         os.listdir(location) if name.endswith('header')])
+    sys.argv = \
+        ('cgps2caom2 --debug --local {} --observation CGPS {} -o {} {} {}'.
+         format(files, test_name, actual_file_name, product_id, uris)).split()
     main_app()
     expected = _read_obs(os.path.join(location, '{}.xml'.format(test_name)))
     actual = _read_obs(actual_file_name)

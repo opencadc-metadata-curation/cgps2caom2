@@ -12,7 +12,7 @@ from astropy.io import fits
 from . import version
 from caom2 import CalibrationLevel, ObservationWriter, SimpleObservation
 from caom2 import Algorithm, ReleaseType, DataProductType
-from caom2utils import ObsBlueprint, FitsParser, POLARIZATION_CTYPES
+from caom2utils import ObsBlueprint, FitsParser, get_arg_parser, get_cadc_headers, proc, POLARIZATION_CTYPES
 
 import argparse
 import logging
@@ -288,7 +288,7 @@ def _set_fits(bp, lookup):
         bp.set(key, value)
 
 
-def _metadata_from(bp, headers, uri, file_name):
+def _metadata_from(bp, headers, uri, local, cert):
     """
     Archive-specific method to fill the blueprint from the file header.
 
@@ -370,7 +370,7 @@ def _metadata_from(bp, headers, uri, file_name):
                             'Chunk.polarization.axis.function.refCoord.val':
                                 crval4})
                 elif content == 'phn' and hdu0.get(
-                        'CTYPE4') in POLARIZATION_CTYPES:
+                        'CTYPE4') == 'STOKES':
                     bp.configure_polarization_axis(4)
             elif collection == 'VGPS':
                 bp.configure_polarization_axis(4)
@@ -426,9 +426,7 @@ def _metadata_from(bp, headers, uri, file_name):
         # fwhm files are text files without FITS headers,
         # but the required metadata can be extracted from the corresponding
         # image file
-
-        image_file_id = file_name.replace('_fwhm.txt', '_image.fits')
-        headers = _get_headers(image_file_id)
+        headers = _get_associated_image_headers(uri, local, cert)
         _set_common(bp, headers, telescope, target, collection)
 
         plane_uri = 'caom:{}/{}/{}'.format(collection,
@@ -460,30 +458,36 @@ def _set_defaults_and_overrides(bp):
     # bp.set_default('process.out.version', '1')
 
 
-def _get_headers(fname):
-    if fname.find('_fwhm') == -1:
-        f = open(fname)
-        content = '\n'.join(f.readlines())
-        f.close()
-        delim = '\nEND'
-        extensions = [e + delim for e in content.split(delim) if e.strip()]
-        headers = [fits.Header.fromstring(e, sep='\n') for e in extensions]
-        return headers
+def _get_associated_image_headers(uri, local, cert):
+    image_uri = uri.replace('_fwhm.txt', '_image.fits')
+    index = 0
+    if local:
+        fname = image_uri.split('ad:CGPS/')[1]
+        for key, value in enumerate(local):
+            if value.find(fname) != -1:
+                index = key
+                print('key {} value {} index {}'.format(key, value, index))
+                break
+    return _get_headers(image_uri, local, index, cert)
+
+
+def _get_headers(uri, local, index, cert):
+    if uri.find('_fwhm') == -1:
+        if local:
+            file = local[index]
+            headers = get_cadc_headers('file://{}'.format(file))
+        else:
+            headers = get_cadc_headers(uri, cert)
     else:
-        return None
+        headers = []
+    return headers
 
 
-def _get_uri(collection, fname):
-    """This really shouldn't last."""
-    basename = os.path.basename(fname).split('.header')[0]
-    return 'ad:{}/{}'.format(collection, basename)
-
-
-def draw_cgps_blueprint(uri, headers, file_name):
+def draw_cgps_blueprint(uri, headers, local, cert):
     logging.debug('Begin blueprint customization for CGPS {}.'.format(uri))
     blueprint = ObsBlueprint()
 
-    _metadata_from(blueprint, headers, uri, file_name)
+    _metadata_from(blueprint, headers, uri, local, cert)
     _set_defaults_and_overrides(blueprint)
 
     logging.debug('Blueprint customatization complete for CGPS {}.'.format(uri))
@@ -491,110 +495,19 @@ def draw_cgps_blueprint(uri, headers, file_name):
 
 
 def main_app():
-    parser = argparse.ArgumentParser()
-    parser.description = (
-        'Augment CGPS observation with information in one or more fits files.')
 
-    if version.version is not None:
-        parser.add_argument('-V', '--version', action='version',
-                            version=version)
-
-    log_group = parser.add_mutually_exclusive_group()
-    log_group.add_argument('-d', '--debug', action='store_true',
-                           help='debug messages')
-    log_group.add_argument('-q', '--quiet', action='store_true',
-                           help='run quietly')
-    log_group.add_argument('-v', '--verbose', action='store_true',
-                           help='verbose messages')
-
-    parser.add_argument('--dumpconfig', action='store_true',
-                        help=('output the utype to keyword mapping to '
-                              'the console'))
-
-    parser.add_argument('--ignorePartialWCS', action='store_true',
-                        help='do not stop and exit upon finding partial WCS')
-
-    parser.add_argument('-o', '--out', dest='out_obs_xml',
-                        type=argparse.FileType('wb'),
-                        help='output of augmented observation in XML',
-                        required=False)
-
-    in_group = parser.add_mutually_exclusive_group(required=True)
-    in_group.add_argument('-i', '--in', dest='in_obs_xml',
-                          type=argparse.FileType('r'),
-                          help='input of observation to be augmented in XML')
-    in_group.add_argument('--observation', nargs=2,
-                          help='observation in a collection',
-                          metavar=('collection', 'observationID'))
-
-    parser.add_argument('--log', help='log file name > (instead of console)')
-    parser.add_argument('--keep', action='store_true',
-                        help='keep the locally stored files after ingestion')
-    parser.add_argument('--test', action='store_true',
-                        help='test mode, do not persist to database')
-    parser.add_argument('--cert', help='Proxy Cert&Key PEM file')
-
-    parser.add_argument('productID',
-                        help='product ID of the plane in the observation')
-    parser.add_argument('fileURI', help='URI of a fits file', nargs='+')
-
-    if len(sys.argv) < 2:
-        # correct error message when running python3
-        parser.print_usage(file=sys.stderr)
-        sys.stderr.write("{}: error: too few arguments\n".format(APP_NAME))
-        sys.exit(-1)
-
-    args = parser.parse_args()
-    if args.verbose:
-        logging.basicConfig(level=logging.INFO, stream=sys.stdout)
-    elif args.debug:
-        logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
-    elif args.quiet:
-        logging.basicConfig(level=logging.ERROR, stream=sys.stdout)
-    else:
-        logging.basicConfig(level=logging.WARN, stream=sys.stdout)
-
-    observation = SimpleObservation(collection=args.observation[0],
-                                    observation_id=args.observation[1],
-                                    algorithm=Algorithm('exposure'))
-    for i, file_name in enumerate(args.fileURI):
-        logging.debug('Begin processing for {}'.format(file_name))
-        headers = _get_headers(file_name)
+    args = get_arg_parser().parse_args()
+    blueprints = {}
+    for i, uri in enumerate(args.fileURI):
+        logging.debug('Begin processing for {}'.format(uri))
+        headers = _get_headers(uri, args.local, i, args.cert)
         # print(repr(headers))
-        # uri = 'ad:{}/{}'.format(args.observation[0], file_name)
-        uri = _get_uri(args.observation[0], file_name)
-        print('processing for uri {}'.format(uri))
-        blueprint = draw_cgps_blueprint(uri, headers, file_name)
-        if file_name.find('_fwhm') == -1:
-            fitsparser = FitsParser(headers)
-            fitsparser.blueprint = blueprint
-            fitsparser.apply_config_to_fits()
-        else:
-            fitsparser = FitsParser([])
-            fitsparser.blueprint = blueprint
-        # print(repr(blueprint._plan))
-        print('product id is {}'.format(blueprint._get('Plane.productID')))
-        # fitsparser.logger.setLevel(logging.DEBUG)
-        fitsparser.augment_observation(observation=observation,
-                                       artifact_uri=uri,
-                                       product_id=blueprint._get(
-                                           'Plane.productID'))
-        print('catalog uri is {}'.format(catalog_uri))
-
-    # if file_name.find('_fwhm') != -1:
-        #     break
+        print('draw blueprint for uri {}'.format(uri))
+        blueprint = draw_cgps_blueprint(uri, headers, args.local, args.cert)
+        blueprints[uri] = blueprint
 
     if catalog_uri is not None:
-        print('catalog uri is {}'.format(catalog_uri))
-        fitsparser = FitsParser([])
-        fitsparser.blueprint = catalog_blueprint
-        fitsparser.augment_observation(observation=observation,
-                                       artifact_uri=catalog_uri,
-                                       product_id=catalog_blueprint._get(
-                                           'Plane.productID'))
+        blueprints[catalog_uri] = catalog_blueprint
 
-    if args.out_obs_xml:
-        writer = ObservationWriter()
-        writer.write(observation, args.out_obs_xml)
-
+    proc(args, blueprints)
     logging.debug('Done processing for {}'.format(args.observation[1]))
