@@ -33,18 +33,10 @@ def test_draw():
     assert test_blueprint._plan['Chunk.energy.restfrq'] == (['OBSFREQ'], None)
     assert test_blueprint._plan['Observation.intent'] == 'science'
     assert test_blueprint._plan['Plane.provenance.lastExecuted'] == (
-    ['DATE-FTS'], None)
-
-    # test_blueprint = draw_cgps_blueprint(
-    #     TEST_URI_FHWM, [], os.path.join(TESTDATA_DIR,
-    #                                     'CGPS_MD1_100_um_fwhm.txt.header'))
-    # assert test_blueprint is not None
-    # assert test_blueprint._plan['Plane.productID'] == 'catalog'
-    # assert test_blueprint._plan['Artifact.productType'] == 'science'
+        ['DATE-FTS'], None)
 
 
-# @pytest.mark.parametrize('test_name', ['MC2_DRAO-ST', 'MC2_FCRAO', 'MD1_IRAS'])
-@pytest.mark.parametrize('test_name', ['MD1_IRAS'])
+@pytest.mark.parametrize('test_name', ['MC2_DRAO-ST', 'MC2_FCRAO', 'MD1_IRAS'])
 def test_main_app(test_name):
     product_id = 'ignored_product_id'
     location = os.path.join(TESTDATA_DIR, test_name)
@@ -62,8 +54,11 @@ def test_main_app(test_name):
     expected = _read_obs(os.path.join(location, '{}.xml'.format(test_name)))
     actual = _read_obs(actual_file_name)
     result = get_differences(expected, actual, 'Observation')
-    print('\n'.join(str(p) for p in result))
-    assert len(result) == 0
+    if result:
+        msg = 'Differences found in observation {} in {}\n{}'. \
+            format(expected.observation_id,
+                   location, '\n'.join([r for r in result]))
+        raise AssertionError(msg)
 
 
 def _read_obs(fname):

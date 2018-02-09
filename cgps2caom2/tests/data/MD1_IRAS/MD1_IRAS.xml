@@ -1,17 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<caom2:Observation xmlns:caom2="http://www.opencadc.org/caom2/xml/v2.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="caom2:SimpleObservation" caom2:id="00000000-0000-0000-77c4-01394b4ee4a6" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:1dce257ab91b8fc5e23f8b1c81358c55" caom2:accMetaChecksum="md5:d8d58fb8001241b87fa2bdc0ad939315">
+<caom2:Observation xmlns:caom2="http://www.opencadc.org/caom2/xml/v2.3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="caom2:SimpleObservation" caom2:id="00000000-0000-0000-8fec-a1e4ab071eaf">
   <caom2:collection>CGPS</caom2:collection>
   <caom2:observationID>MD1_IRAS</caom2:observationID>
   <caom2:metaRelease>2000-01-01T00:00:00.000</caom2:metaRelease>
   <caom2:algorithm>
-    <caom2:name>exposure</caom2:name>
+    <caom2:name>EXPOSURE</caom2:name>
   </caom2:algorithm>
   <caom2:intent>science</caom2:intent>
   <caom2:target>
     <caom2:name>MD1</caom2:name>
     <caom2:type>field</caom2:type>
     <caom2:standard>false</caom2:standard>
-    <caom2:moving>false</caom2:moving>
   </caom2:target>
   <caom2:telescope>
     <caom2:name>IRAS</caom2:name>
@@ -20,868 +19,64 @@
     <caom2:name>IRAS</caom2:name>
   </caom2:instrument>
   <caom2:planes>
-    <caom2:plane caom2:id="00000000-0000-0000-9a70-01394b4f8fc6" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:06c9cd682b12afa4a86e498e560412d5" caom2:accMetaChecksum="md5:2fe9103cdc89fadf0c3302d8bf0ecb1f">
-      <caom2:productID>100um</caom2:productID>
+    <caom2:plane caom2:id="00000000-0000-0000-9b5a-2fd5689b394a">
+      <caom2:productID>catalog</caom2:productID>
       <caom2:metaRelease>2000-01-01T00:00:00.000</caom2:metaRelease>
       <caom2:dataRelease>2000-01-01T00:00:00.000</caom2:dataRelease>
-      <caom2:dataProductType>image</caom2:dataProductType>
+      <caom2:dataProductType>http://www.opencadc.org/caom2/DataProductType#catalog</caom2:dataProductType>
       <caom2:calibrationLevel>2</caom2:calibrationLevel>
       <caom2:provenance>
         <caom2:name>CGPS MOSAIC HIRES</caom2:name>
         <caom2:project>CGPS</caom2:project>
         <caom2:producer>CGPS Consortium</caom2:producer>
         <caom2:reference>http://dx.doi.org/10.1086/375301</caom2:reference>
-        <caom2:lastExecuted>2000-11-09T00:00:00.000</caom2:lastExecuted>
+        <caom2:inputs>
+          <caom2:planeURI>caom:CGPS/MD1_IRAS/12um</caom2:planeURI>
+          <caom2:planeURI>caom:CGPS/MD1_IRAS/60um</caom2:planeURI>
+          <caom2:planeURI>caom:CGPS/MD1_IRAS/25um</caom2:planeURI>
+          <caom2:planeURI>caom:CGPS/MD1_IRAS/100um</caom2:planeURI>
+        </caom2:inputs>
       </caom2:provenance>
       <caom2:artifacts>
-        <caom2:artifact caom2:id="00000000-0000-0000-9a70-01394b4f8fca" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:716faa15e6f0c077ceb12bca951880fa" caom2:accMetaChecksum="md5:e29c5829b047b59a71aa0b74e8200879">
-          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_beams.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:329ffd0875efbcbd95ca3e4b5f8882c9</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-9a70-01394b4f8fcc" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:79e31a57962eec9c1a01cc80781ec109" caom2:accMetaChecksum="md5:09608172f407f9ba2c0167ed7b5e972a">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-9a70-01394b4f8fce" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:a13dad1e0e8dd0f595ec8a2db20d442f" caom2:accMetaChecksum="md5:606ddf456191a92e9eeb66c8f351240e">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999994</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999994</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-9a70-01394b4f913a" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:d122532cf8fa550f0ea748f1cf471bb7" caom2:accMetaChecksum="md5:ac85fb1a3ad3323fd4f8e575c26de959">
-          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_cfv.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:4562b40d5e376a90752321844af8434a</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-9a70-01394b4f913c" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:a3c1202d37963f6bfaaf1afa2106ff45" caom2:accMetaChecksum="md5:4a1591d5b46a733878ed98194e409830">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-9a70-01394b4f913d" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:c41bb87c508de4c92c6688b0abc3b786" caom2:accMetaChecksum="md5:42e9190806fa96f73c8d3b853435e57a">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999994</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999994</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-9a70-01394b4f9264" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:60bc9039110b1804d7e8423d2ff9076a" caom2:accMetaChecksum="md5:c812aec7303c8eec7184852d371859bf">
-          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_fwhm.txt</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>text/plain</caom2:contentType>
-          <caom2:contentLength>60188</caom2:contentLength>
-          <caom2:contentChecksum>md5:c28a09dfca60d41614ee6d5fffe6139f</caom2:contentChecksum>
-          <caom2:parts/>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-9a70-01394b4fd51e" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:479ce8415b102b55d2ee7a09cafac4c0" caom2:accMetaChecksum="md5:5f982ea8850f08abaad90aabd87735de">
-          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_image.fits</caom2:uri>
-          <caom2:productType>science</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:c964a5f5daf41911c93c18ec1656144a</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-9a70-01394b4fd520" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:776de64ddbfd6992242c53b32b3d6883" caom2:accMetaChecksum="md5:59b9bf2a0657c29e0c918b1318f1c84f">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-9a70-01394b4fd521" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:9cf3bc692b914ce2de4472f68c0b4388" caom2:accMetaChecksum="md5:1b575ede01becce778b0c2e67d24ed49">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:energyAxis>3</caom2:energyAxis>
-                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999994</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999994</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                  <caom2:energy>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>WAVE</caom2:ctype>
-                        <caom2:cunit>m</caom2:cunit>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>3.15e-05</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>0.0001</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                    <caom2:specsys>TOPOCENT</caom2:specsys>
-                    <caom2:bandpassName>IRAS-100um</caom2:bandpassName>
-                  </caom2:energy>
-                  <caom2:polarization>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>STOKES</caom2:ctype>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>1.0</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>1.0</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:polarization>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-9a70-01394b4fd5f6" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:3323212aaf43b3ec9a80d46f084640eb" caom2:accMetaChecksum="md5:2ffbbbe19dd732ba4e7ba504997364a8">
-          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_phn.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:11e3ea7e4b74a92d0ff48afd203a9037</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-9a70-01394b4fd5f7" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:8d47780734648c2712fd99852ccab10f" caom2:accMetaChecksum="md5:5975a44cb7a62ea500d0d4c4286caa10">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-9a70-01394b4fd5f8" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:6917cca0b402c60c8ae41aaed7c21054" caom2:accMetaChecksum="md5:85ee8838ce186c9d02f9d4cc9e0048ac">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999994</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999994</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                  <caom2:polarization>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>STOKES</caom2:ctype>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>1.0</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>1.0</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:polarization>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-      </caom2:artifacts>
-    </caom2:plane>
-    <caom2:plane caom2:id="00000000-0000-0000-77c4-01394b4ee5bf" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:93eb7c3379c5516692446a7f4400bfb8" caom2:accMetaChecksum="md5:7736922e2dfbf9aff250d42c8fcdad20">
-      <caom2:productID>12um</caom2:productID>
-      <caom2:metaRelease>2000-01-01T00:00:00.000</caom2:metaRelease>
-      <caom2:dataRelease>2000-01-01T00:00:00.000</caom2:dataRelease>
-      <caom2:dataProductType>image</caom2:dataProductType>
-      <caom2:calibrationLevel>2</caom2:calibrationLevel>
-      <caom2:provenance>
-        <caom2:name>CGPS MOSAIC HIRES</caom2:name>
-        <caom2:project>CGPS</caom2:project>
-        <caom2:producer>CGPS Consortium</caom2:producer>
-        <caom2:reference>http://dx.doi.org/10.1086/375301</caom2:reference>
-        <caom2:lastExecuted>2000-11-09T00:00:00.000</caom2:lastExecuted>
-      </caom2:provenance>
-      <caom2:artifacts>
-        <caom2:artifact caom2:id="00000000-0000-0000-77c4-01394b4ee5c5" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:7b3d2d94648ac185a8d3a7de02f077b8" caom2:accMetaChecksum="md5:56351e0ea93a4ef5d69d196700fbfc16">
-          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_beams.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:30f083398a3fb6b1109cd257433edef0</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-77c4-01394b4ee5c7" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:73c4eb435ef11012019f4c4a926a3156" caom2:accMetaChecksum="md5:b57ea794abbfb08147138a9cff273659">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-77c4-01394b4ee5c8" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:a83615482e94a8fbe5cb175ce6b65bb6" caom2:accMetaChecksum="md5:413da314ca1752a390941dc5bfbf45e3">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999999</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999999</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-77c4-01394b4ee728" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:5a58ba9c1f82a6ab343be3234dfc0b51" caom2:accMetaChecksum="md5:a1d57597305838d7befe7fe0650775e2">
-          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_cfv.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:63e0679b22ab4a30152747bdbb3e535e</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-77c4-01394b4ee729" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:c1b114b5818f2efd942352d525952906" caom2:accMetaChecksum="md5:52507bc194720dd4665833057b6d4a4b">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-77c4-01394b4ee72b" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:f0fb4f258c94709008fe20110234c280" caom2:accMetaChecksum="md5:a633ba380ee58151fa11c182cebe2833">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999999</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999999</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-77c4-01394b4ee7ca" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:f886d6727a8fcbe5436886e5079e4bd0" caom2:accMetaChecksum="md5:f85cfeb79f5d5e49e17445226a4be70b">
+        <caom2:artifact caom2:id="00000000-0000-0000-ae67-527547debb97">
           <caom2:uri>ad:CGPS/CGPS_MD1_012_um_fwhm.txt</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:productType>science</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
           <caom2:contentType>text/plain</caom2:contentType>
           <caom2:contentLength>60188</caom2:contentLength>
           <caom2:contentChecksum>md5:091e4e717bee6b278440151206f5ad7b</caom2:contentChecksum>
           <caom2:parts/>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-77c4-01394b4ee954" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:a2bac78b2a1dcb03775427026d9fa63e" caom2:accMetaChecksum="md5:45f6f2dd9de21c2b3468c114dd4ef4c1">
-          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_image.fits</caom2:uri>
+        <caom2:artifact caom2:id="00000000-0000-0000-a9fe-65956ec00b95">
+          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_fwhm.txt</caom2:uri>
           <caom2:productType>science</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:8eb04dd8346deceb832abcfc7017bb05</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-77c4-01394b4ee956" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:a7ade3586df02c5ec7ae3166e1b39414" caom2:accMetaChecksum="md5:d89d2e3376b7513664c3d0cb9243d8c0">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-77c4-01394b4ee957" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:c6367cdbda93f64a5a9b9f02f59a0e9f" caom2:accMetaChecksum="md5:6457421329b1f5ef941467ce8979e2ee">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:energyAxis>3</caom2:energyAxis>
-                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999999</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999999</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                  <caom2:energy>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>WAVE</caom2:ctype>
-                        <caom2:cunit>m</caom2:cunit>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>7e-06</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>1.2e-05</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                    <caom2:specsys>TOPOCENT</caom2:specsys>
-                    <caom2:bandpassName>IRAS-12um</caom2:bandpassName>
-                  </caom2:energy>
-                  <caom2:polarization>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>STOKES</caom2:ctype>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>1.0</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>1.0</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:polarization>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
+          <caom2:contentType>text/plain</caom2:contentType>
+          <caom2:contentLength>60188</caom2:contentLength>
+          <caom2:contentChecksum>md5:c28a09dfca60d41614ee6d5fffe6139f</caom2:contentChecksum>
+          <caom2:parts/>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-77c4-01394b4eea8e" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:305d88ffa4244d68fea89c9069de764d" caom2:accMetaChecksum="md5:31a8a388902936ac57019d5ff448a5e4">
-          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_phn.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:b34ff939148651f9b8b915c830a1778c</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-77c4-01394b4eea8f" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:48a6c1bc2bd10cde1717b7710bc0df2b" caom2:accMetaChecksum="md5:dc7b91519be68805622e7f217d50bd60">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-77c4-01394b4eea91" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:94ade6d1ecfb7c904c6b5c9b600e2b43" caom2:accMetaChecksum="md5:b1d483ab92625c843d69a7a2dbed25f0">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999999</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999999</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                  <caom2:polarization>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>STOKES</caom2:ctype>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>1.0</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>1.0</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:polarization>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-      </caom2:artifacts>
-    </caom2:plane>
-    <caom2:plane caom2:id="00000000-0000-0000-6a89-01394b4eedf8" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:ddbf6818cadee257676b941216e17dc7" caom2:accMetaChecksum="md5:62638566fc88688f6e3ef5aa6d5c9e8c">
-      <caom2:productID>25um</caom2:productID>
-      <caom2:metaRelease>2000-01-01T00:00:00.000</caom2:metaRelease>
-      <caom2:dataRelease>2000-01-01T00:00:00.000</caom2:dataRelease>
-      <caom2:dataProductType>image</caom2:dataProductType>
-      <caom2:calibrationLevel>2</caom2:calibrationLevel>
-      <caom2:provenance>
-        <caom2:name>CGPS MOSAIC HIRES</caom2:name>
-        <caom2:project>CGPS</caom2:project>
-        <caom2:producer>CGPS Consortium</caom2:producer>
-        <caom2:reference>http://dx.doi.org/10.1086/375301</caom2:reference>
-        <caom2:lastExecuted>2000-11-09T00:00:00.000</caom2:lastExecuted>
-      </caom2:provenance>
-      <caom2:artifacts>
-        <caom2:artifact caom2:id="00000000-0000-0000-6a89-01394b4eedfd" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:790287bc2455651d8cf1bda00e0402ab" caom2:accMetaChecksum="md5:526750409e79761da2995dea240a84f4">
-          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_beams.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:95ae5e472e0af5ce370a9a9f2cd55a75</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-6a89-01394b4eee04" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:13d7d97f66ec3f5ea71b8cf2001c7735" caom2:accMetaChecksum="md5:08d75ded193f33f1985ea1d313953fdd">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-6a89-01394b4eee05" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:d910a7751b156cf61575f82361b20bf7" caom2:accMetaChecksum="md5:b59e2150e30dd73cc9ae226bfec8c1c3">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999999</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999999</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-6a89-01394b4eef81" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:500cccca63fa22f7897bd160822b3772" caom2:accMetaChecksum="md5:b67cb9398847ca4879722d7221989f61">
-          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_cfv.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:e1f09ed23cb587a9e207d2325c28370b</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-6a89-01394b4eef82" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:ef1c5ba29bfd51e0b4be4d5f4b2bfead" caom2:accMetaChecksum="md5:a6f91d18f899c3c5c005a840918911e2">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-6a89-01394b4eef83" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:f6cbbb34a1e057edec1f39f07e9db09c" caom2:accMetaChecksum="md5:9adc159c179611ab4060033d7997215c">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999999</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999999</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-6a89-01394b4ef5cc" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:9a496f162326a1d46ca96ed7922e7017" caom2:accMetaChecksum="md5:124043091779a5c44fc2667975f8fa95">
+        <caom2:artifact caom2:id="00000000-0000-0000-887c-f4a95449ba21">
           <caom2:uri>ad:CGPS/CGPS_MD1_025_um_fwhm.txt</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:productType>science</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
           <caom2:contentType>text/plain</caom2:contentType>
           <caom2:contentLength>60188</caom2:contentLength>
           <caom2:contentChecksum>md5:d6b5fd2f2820c62b2aa113b3ba28ea0b</caom2:contentChecksum>
           <caom2:parts/>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-6a89-01394b4f3be2" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:c5e3d4a18b322e00c3aa0f86f7e99ee2" caom2:accMetaChecksum="md5:789465ce8be1cecbe58fbfc18ff2d7de">
-          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_image.fits</caom2:uri>
+        <caom2:artifact caom2:id="00000000-0000-0000-87cb-373c973a6c31">
+          <caom2:uri>ad:CGPS/CGPS_MD1_060_um_fwhm.txt</caom2:uri>
           <caom2:productType>science</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:106e7d174482906d8acf5844493bd274</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-6a89-01394b4f3be4" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:a03700701cafaa9b2cf279c34b3af6f8" caom2:accMetaChecksum="md5:dbec4c9e07ff91af4f739fba62a70767">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-6a89-01394b4f3be5" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:62a2557749ad03314c4ce67c0f195fe6" caom2:accMetaChecksum="md5:362dc8e3a2a221e4893b33a4b35e72b5">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:energyAxis>3</caom2:energyAxis>
-                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999999</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999999</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                  <caom2:energy>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>WAVE</caom2:ctype>
-                        <caom2:cunit>m</caom2:cunit>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>1.115e-05</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>2.5e-05</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                    <caom2:specsys>TOPOCENT</caom2:specsys>
-                    <caom2:bandpassName>IRAS-25um</caom2:bandpassName>
-                  </caom2:energy>
-                  <caom2:polarization>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>STOKES</caom2:ctype>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>1.0</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>1.0</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:polarization>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-6a89-01394b4f3cfa" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:7ec2c259bf719185e3a2f5f3d1574534" caom2:accMetaChecksum="md5:f03cd23b26f40df2f5f5f80cd1681b18">
-          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_phn.fits</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>application/fits</caom2:contentType>
-          <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:ed4f555194fa79857efe1bf8d0929cca</caom2:contentChecksum>
-          <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-6a89-01394b4f3cfc" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:35323ec17a238424fb53772d8fa7ba15" caom2:accMetaChecksum="md5:e1b50ee9628cdeeca192c149d064d123">
-              <caom2:name>0</caom2:name>
-              <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-6a89-01394b4f3cfd" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:67625f42293ece7693e5189a2ea65d58" caom2:accMetaChecksum="md5:36d47c024e6ba4cf67fe445f6221d36d">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
-                  <caom2:positionAxis1>1</caom2:positionAxis1>
-                  <caom2:positionAxis2>2</caom2:positionAxis2>
-                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
-                  <caom2:position>
-                    <caom2:axis>
-                      <caom2:axis1>
-                        <caom2:ctype>GLON-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis1>
-                      <caom2:axis2>
-                        <caom2:ctype>GLAT-CAR</caom2:ctype>
-                        <caom2:cunit>deg</caom2:cunit>
-                      </caom2:axis2>
-                      <caom2:function>
-                        <caom2:dimension>
-                          <caom2:naxis1>1024</caom2:naxis1>
-                          <caom2:naxis2>1024</caom2:naxis2>
-                        </caom2:dimension>
-                        <caom2:refCoord>
-                          <caom2:coord1>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
-                          </caom2:coord1>
-                          <caom2:coord2>
-                            <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
-                          </caom2:coord2>
-                        </caom2:refCoord>
-                        <caom2:cd11>-0.0049999999</caom2:cd11>
-                        <caom2:cd12>0.0</caom2:cd12>
-                        <caom2:cd21>0.0</caom2:cd21>
-                        <caom2:cd22>0.0049999999</caom2:cd22>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:position>
-                  <caom2:polarization>
-                    <caom2:axis>
-                      <caom2:axis>
-                        <caom2:ctype>STOKES</caom2:ctype>
-                      </caom2:axis>
-                      <caom2:function>
-                        <caom2:naxis>1</caom2:naxis>
-                        <caom2:delta>1.0</caom2:delta>
-                        <caom2:refCoord>
-                          <caom2:pix>1.0</caom2:pix>
-                          <caom2:val>1.0</caom2:val>
-                        </caom2:refCoord>
-                      </caom2:function>
-                    </caom2:axis>
-                  </caom2:polarization>
-                </caom2:chunk>
-              </caom2:chunks>
-            </caom2:part>
-          </caom2:parts>
+          <caom2:contentType>text/plain</caom2:contentType>
+          <caom2:contentLength>60188</caom2:contentLength>
+          <caom2:contentChecksum>md5:f7779bc7114e40782155d0e29707ac47</caom2:contentChecksum>
+          <caom2:parts/>
         </caom2:artifact>
       </caom2:artifacts>
     </caom2:plane>
-    <caom2:plane caom2:id="00000000-0000-0000-0c14-01394b4fd925" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:2199f1684e9f18b6704265b2af652b4d" caom2:accMetaChecksum="md5:8e0272b23adb836aafe7195e4466506a">
+    <caom2:plane caom2:id="00000000-0000-0000-82b9-fb932c930353">
       <caom2:productID>60um</caom2:productID>
       <caom2:metaRelease>2000-01-01T00:00:00.000</caom2:metaRelease>
       <caom2:dataRelease>2000-01-01T00:00:00.000</caom2:dataRelease>
@@ -895,22 +90,22 @@
         <caom2:lastExecuted>2000-11-09T00:00:00.000</caom2:lastExecuted>
       </caom2:provenance>
       <caom2:artifacts>
-        <caom2:artifact caom2:id="00000000-0000-0000-0c14-01394b4fd92a" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:5efbd719916c8785ca7b9a36f99c055c" caom2:accMetaChecksum="md5:ba92e294f2cfba48af24a1db7515ddae">
-          <caom2:uri>ad:CGPS/CGPS_MD1_060_um_beams.fits</caom2:uri>
+        <caom2:artifact caom2:id="00000000-0000-0000-9a55-ffff47b48934">
+          <caom2:uri>ad:CGPS/CGPS_MD1_060_um_phn.fits</caom2:uri>
           <caom2:productType>auxiliary</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
           <caom2:contentType>application/fits</caom2:contentType>
           <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:662ddca77c941bf060e4c03f78931d92</caom2:contentChecksum>
+          <caom2:contentChecksum>md5:9ea8d135a93f7be5d360d62d6776020f</caom2:contentChecksum>
           <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-0c14-01394b4fd92c" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:b6ce178a1c5c1efde1f42be5594d17a9" caom2:accMetaChecksum="md5:4ccad386edb29c07e25e64f9c606ae72">
+            <caom2:part caom2:id="00000000-0000-0000-839e-35d584993988">
               <caom2:name>0</caom2:name>
               <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-0c14-01394b4fd92d" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:c07db447fd0c44a2f214ce5d593b85ec" caom2:accMetaChecksum="md5:a19653b621510132622e9db498aee37d">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
+                <caom2:chunk caom2:id="00000000-0000-0000-aced-405a852e17f1">
+                  <caom2:naxis>3</caom2:naxis>
                   <caom2:positionAxis1>1</caom2:positionAxis1>
                   <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
                   <caom2:position>
                     <caom2:axis>
                       <caom2:axis1>
@@ -929,11 +124,11 @@
                         <caom2:refCoord>
                           <caom2:coord1>
                             <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
+                            <caom2:val>116.7499990956</caom2:val>
                           </caom2:coord1>
                           <caom2:coord2>
                             <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
+                            <caom2:val>-0.9999999922536</caom2:val>
                           </caom2:coord2>
                         </caom2:refCoord>
                         <caom2:cd11>-0.0049999994</caom2:cd11>
@@ -943,12 +138,27 @@
                       </caom2:function>
                     </caom2:axis>
                   </caom2:position>
+                  <caom2:polarization>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>STOKES</caom2:ctype>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>1.0</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>1.0</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:polarization>
                 </caom2:chunk>
               </caom2:chunks>
             </caom2:part>
           </caom2:parts>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-0c14-01394b4fdb31" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:37182148627b8e2e0b6cc1b03c99e23d" caom2:accMetaChecksum="md5:850bc99beafc365617476d3554ca8c49">
+        <caom2:artifact caom2:id="00000000-0000-0000-8409-8a74525d8998">
           <caom2:uri>ad:CGPS/CGPS_MD1_060_um_cfv.fits</caom2:uri>
           <caom2:productType>auxiliary</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
@@ -956,12 +166,11 @@
           <caom2:contentLength>4204800</caom2:contentLength>
           <caom2:contentChecksum>md5:f5ec2867c54e06b384fbce701df59dcf</caom2:contentChecksum>
           <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-0c14-01394b4fdb33" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:25bb5a78ce2c8c552c5149ea3975daeb" caom2:accMetaChecksum="md5:b492b4d6bc2304cd560f631a0a062d64">
+            <caom2:part caom2:id="00000000-0000-0000-abfb-195c249102e2">
               <caom2:name>0</caom2:name>
               <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-0c14-01394b4fdb34" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:bc264a88fe4f8b8a6facb73615eacea3" caom2:accMetaChecksum="md5:c288bf56296a2751b53b6ba54bd3fc3c">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
+                <caom2:chunk caom2:id="00000000-0000-0000-baeb-5beba97d5e2a">
+                  <caom2:naxis>2</caom2:naxis>
                   <caom2:positionAxis1>1</caom2:positionAxis1>
                   <caom2:positionAxis2>2</caom2:positionAxis2>
                   <caom2:position>
@@ -982,11 +191,11 @@
                         <caom2:refCoord>
                           <caom2:coord1>
                             <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
+                            <caom2:val>116.7499990956</caom2:val>
                           </caom2:coord1>
                           <caom2:coord2>
                             <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
+                            <caom2:val>-0.9999999922536</caom2:val>
                           </caom2:coord2>
                         </caom2:refCoord>
                         <caom2:cd11>-0.0049999994</caom2:cd11>
@@ -1001,16 +210,7 @@
             </caom2:part>
           </caom2:parts>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-0c14-01394b4fe92f" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:dac149efb9c0228d7032bf3233900fa5" caom2:accMetaChecksum="md5:eeb4ef0e93ea0a24320f750b6da67d3f">
-          <caom2:uri>ad:CGPS/CGPS_MD1_060_um_fwhm.txt</caom2:uri>
-          <caom2:productType>auxiliary</caom2:productType>
-          <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>text/plain</caom2:contentType>
-          <caom2:contentLength>60188</caom2:contentLength>
-          <caom2:contentChecksum>md5:f7779bc7114e40782155d0e29707ac47</caom2:contentChecksum>
-          <caom2:parts/>
-        </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-0c14-01394b501fac" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:f87c95b0e01f2b2301920fb1d9dcfe6f" caom2:accMetaChecksum="md5:311565c6f985df709e6860fed4373a21">
+        <caom2:artifact caom2:id="00000000-0000-0000-a362-a2cfc1a07788">
           <caom2:uri>ad:CGPS/CGPS_MD1_060_um_image.fits</caom2:uri>
           <caom2:productType>science</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
@@ -1018,10 +218,10 @@
           <caom2:contentLength>4204800</caom2:contentLength>
           <caom2:contentChecksum>md5:368eeef94bef9f391d132af26d77becf</caom2:contentChecksum>
           <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-0c14-01394b501fad" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:ce80903f35bc2273e9960ac964e9b330" caom2:accMetaChecksum="md5:036d9a6a67744c07c557d34253d7a867">
+            <caom2:part caom2:id="00000000-0000-0000-b4cc-df337bd98cef">
               <caom2:name>0</caom2:name>
               <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-0c14-01394b501fae" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:b9e07fc01a38fa3b1a5a0378c81f27e9" caom2:accMetaChecksum="md5:7c712dc9dbafb60cd12a113beeeee7cd">
+                <caom2:chunk caom2:id="00000000-0000-0000-8bba-46a6639726a8">
                   <caom2:naxis>4</caom2:naxis>
                   <caom2:positionAxis1>1</caom2:positionAxis1>
                   <caom2:positionAxis2>2</caom2:positionAxis2>
@@ -1045,11 +245,11 @@
                         <caom2:refCoord>
                           <caom2:coord1>
                             <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
+                            <caom2:val>116.7499990956</caom2:val>
                           </caom2:coord1>
                           <caom2:coord2>
                             <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
+                            <caom2:val>-0.9999999922536</caom2:val>
                           </caom2:coord2>
                         </caom2:refCoord>
                         <caom2:cd11>-0.0049999994</caom2:cd11>
@@ -1097,20 +297,87 @@
             </caom2:part>
           </caom2:parts>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-0c14-01394b506e01" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:d2dacc9aa15a50cc2b97ae6ad676cf31" caom2:accMetaChecksum="md5:18b82527b253e5ec35efcb36163bd2bb">
-          <caom2:uri>ad:CGPS/CGPS_MD1_060_um_phn.fits</caom2:uri>
+        <caom2:artifact caom2:id="00000000-0000-0000-9008-ccaa1fe879b1">
+          <caom2:uri>ad:CGPS/CGPS_MD1_060_um_beams.fits</caom2:uri>
           <caom2:productType>auxiliary</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
           <caom2:contentType>application/fits</caom2:contentType>
           <caom2:contentLength>4204800</caom2:contentLength>
-          <caom2:contentChecksum>md5:9ea8d135a93f7be5d360d62d6776020f</caom2:contentChecksum>
+          <caom2:contentChecksum>md5:662ddca77c941bf060e4c03f78931d92</caom2:contentChecksum>
           <caom2:parts>
-            <caom2:part caom2:id="00000000-0000-0000-0c14-01394b506e03" caom2:lastModified="2016-10-27T20:26:04.757" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:88aef3ecc90a74cc27ed0c0dd9f9b006" caom2:accMetaChecksum="md5:c70b7618491dcb083e032e29db00f893">
+            <caom2:part caom2:id="00000000-0000-0000-85af-ecc79af32688">
               <caom2:name>0</caom2:name>
               <caom2:chunks>
-                <caom2:chunk caom2:id="00000000-0000-0000-0c14-01394b506e04" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:39a00562bea1b4897e44777c1a0a4012" caom2:accMetaChecksum="md5:ca5ea85f1eb521d33371e2d7667d46d6">
-                  <caom2:naxis>4</caom2:naxis>
-                  <caom2:observableAxis>3</caom2:observableAxis>
+                <caom2:chunk caom2:id="00000000-0000-0000-861d-4517a67b4a03">
+                  <caom2:naxis>2</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999994</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999994</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
+      </caom2:artifacts>
+    </caom2:plane>
+    <caom2:plane caom2:id="00000000-0000-0000-847e-512a22729d0d">
+      <caom2:productID>100um</caom2:productID>
+      <caom2:metaRelease>2000-01-01T00:00:00.000</caom2:metaRelease>
+      <caom2:dataRelease>2000-01-01T00:00:00.000</caom2:dataRelease>
+      <caom2:dataProductType>image</caom2:dataProductType>
+      <caom2:calibrationLevel>2</caom2:calibrationLevel>
+      <caom2:provenance>
+        <caom2:name>CGPS MOSAIC HIRES</caom2:name>
+        <caom2:project>CGPS</caom2:project>
+        <caom2:producer>CGPS Consortium</caom2:producer>
+        <caom2:reference>http://dx.doi.org/10.1086/375301</caom2:reference>
+        <caom2:lastExecuted>2000-11-09T00:00:00.000</caom2:lastExecuted>
+      </caom2:provenance>
+      <caom2:artifacts>
+        <caom2:artifact caom2:id="00000000-0000-0000-a54f-d75ab216a4e7">
+          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_phn.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:11e3ea7e4b74a92d0ff48afd203a9037</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-a544-7b1950fa6a38">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-b5d9-a0f574078bb0">
+                  <caom2:naxis>3</caom2:naxis>
                   <caom2:positionAxis1>1</caom2:positionAxis1>
                   <caom2:positionAxis2>2</caom2:positionAxis2>
                   <caom2:polarizationAxis>4</caom2:polarizationAxis>
@@ -1132,11 +399,11 @@
                         <caom2:refCoord>
                           <caom2:coord1>
                             <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>116.749999096</caom2:val>
+                            <caom2:val>116.7499990956</caom2:val>
                           </caom2:coord1>
                           <caom2:coord2>
                             <caom2:pix>513.0</caom2:pix>
-                            <caom2:val>-0.999999992254</caom2:val>
+                            <caom2:val>-0.9999999922536</caom2:val>
                           </caom2:coord2>
                         </caom2:refCoord>
                         <caom2:cd11>-0.0049999994</caom2:cd11>
@@ -1166,61 +433,746 @@
             </caom2:part>
           </caom2:parts>
         </caom2:artifact>
+        <caom2:artifact caom2:id="00000000-0000-0000-964b-c431bac9d441">
+          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_cfv.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:4562b40d5e376a90752321844af8434a</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-9bd5-2469c6cb5501">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-8dd4-b5d9e9bb35c0">
+                  <caom2:naxis>2</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999994</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999994</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
+        <caom2:artifact caom2:id="00000000-0000-0000-a37c-d671422d7441">
+          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_beams.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:329ffd0875efbcbd95ca3e4b5f8882c9</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-9607-ff029be09560">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-9b3e-f0db6e23bf1c">
+                  <caom2:naxis>2</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999994</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999994</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
+        <caom2:artifact caom2:id="00000000-0000-0000-9f00-3865be501918">
+          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_image.fits</caom2:uri>
+          <caom2:productType>science</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:c964a5f5daf41911c93c18ec1656144a</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-8c3a-38387bd14ae7">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-a5c6-b9101fab9df2">
+                  <caom2:naxis>4</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:energyAxis>3</caom2:energyAxis>
+                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999994</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999994</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                  <caom2:energy>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>WAVE</caom2:ctype>
+                        <caom2:cunit>m</caom2:cunit>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>3.15e-05</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>0.0001</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                    <caom2:specsys>TOPOCENT</caom2:specsys>
+                    <caom2:bandpassName>IRAS-100um</caom2:bandpassName>
+                  </caom2:energy>
+                  <caom2:polarization>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>STOKES</caom2:ctype>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>1.0</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>1.0</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:polarization>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
       </caom2:artifacts>
     </caom2:plane>
-    <caom2:plane caom2:id="00000000-0000-0000-5a68-0140be32c4c4" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:8b242c37076bc8e99a7d6fd7961e25f7" caom2:accMetaChecksum="md5:4e3408267630dadd93d2398c5916074a">
-      <caom2:productID>catalog</caom2:productID>
+    <caom2:plane caom2:id="00000000-0000-0000-b6ce-0731170ad509">
+      <caom2:productID>12um</caom2:productID>
       <caom2:metaRelease>2000-01-01T00:00:00.000</caom2:metaRelease>
       <caom2:dataRelease>2000-01-01T00:00:00.000</caom2:dataRelease>
+      <caom2:dataProductType>image</caom2:dataProductType>
       <caom2:calibrationLevel>2</caom2:calibrationLevel>
       <caom2:provenance>
         <caom2:name>CGPS MOSAIC HIRES</caom2:name>
         <caom2:project>CGPS</caom2:project>
         <caom2:producer>CGPS Consortium</caom2:producer>
         <caom2:reference>http://dx.doi.org/10.1086/375301</caom2:reference>
-        <caom2:inputs>
-          <caom2:planeURI>caom:CGPS/MD1_IRAS/60um</caom2:planeURI>
-          <caom2:planeURI>caom:CGPS/MD1_IRAS/25um</caom2:planeURI>
-          <caom2:planeURI>caom:CGPS/MD1_IRAS/12um</caom2:planeURI>
-          <caom2:planeURI>caom:CGPS/MD1_IRAS/100um</caom2:planeURI>
-        </caom2:inputs>
+        <caom2:lastExecuted>2000-11-09T00:00:00.000</caom2:lastExecuted>
       </caom2:provenance>
       <caom2:artifacts>
-        <caom2:artifact caom2:id="00000000-0000-0000-5a68-0140be32c4c8" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:f2da611e0923ac721d1eab7f72b5d641" caom2:accMetaChecksum="md5:9af4ad6330929c498b4e0bc72a716c9d">
-          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_fwhm.txt</caom2:uri>
-          <caom2:productType>science</caom2:productType>
+        <caom2:artifact caom2:id="00000000-0000-0000-ba7f-cfd59ffa4270">
+          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_phn.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>text/plain</caom2:contentType>
-          <caom2:contentLength>60188</caom2:contentLength>
-          <caom2:contentChecksum>md5:091e4e717bee6b278440151206f5ad7b</caom2:contentChecksum>
-          <caom2:parts/>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:b34ff939148651f9b8b915c830a1778c</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-971c-64b0c4b31709">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-a8a7-0565704ff985">
+                  <caom2:naxis>3</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999999</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999999</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                  <caom2:polarization>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>STOKES</caom2:ctype>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>1.0</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>1.0</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:polarization>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-5a68-0140be32c539" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:6d116af7ff59ad1399fbfe3c8afe93f7" caom2:accMetaChecksum="md5:38494735cf8c50a4caf4bcd2926af1ac">
-          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_fwhm.txt</caom2:uri>
-          <caom2:productType>science</caom2:productType>
+        <caom2:artifact caom2:id="00000000-0000-0000-b444-f8387f8f12b3">
+          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_beams.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>text/plain</caom2:contentType>
-          <caom2:contentLength>60188</caom2:contentLength>
-          <caom2:contentChecksum>md5:d6b5fd2f2820c62b2aa113b3ba28ea0b</caom2:contentChecksum>
-          <caom2:parts/>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:30f083398a3fb6b1109cd257433edef0</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-9433-b7061aa87764">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-bbbe-c0c2c30c3ec7">
+                  <caom2:naxis>2</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999999</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999999</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-5a68-0140be32c5ab" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:dfb322c1c58f37ee303e80b760bccd79" caom2:accMetaChecksum="md5:66a3a7e3ff20de0c114e497af0e6158a">
-          <caom2:uri>ad:CGPS/CGPS_MD1_060_um_fwhm.txt</caom2:uri>
+        <caom2:artifact caom2:id="00000000-0000-0000-b088-addc29302563">
+          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_image.fits</caom2:uri>
           <caom2:productType>science</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>text/plain</caom2:contentType>
-          <caom2:contentLength>60188</caom2:contentLength>
-          <caom2:contentChecksum>md5:f7779bc7114e40782155d0e29707ac47</caom2:contentChecksum>
-          <caom2:parts/>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:8eb04dd8346deceb832abcfc7017bb05</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-96a5-5ba630865a35">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-bff4-69479711ff68">
+                  <caom2:naxis>4</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:energyAxis>3</caom2:energyAxis>
+                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999999</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999999</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                  <caom2:energy>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>WAVE</caom2:ctype>
+                        <caom2:cunit>m</caom2:cunit>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>7e-06</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>1.2e-05</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                    <caom2:specsys>TOPOCENT</caom2:specsys>
+                    <caom2:bandpassName>IRAS-12um</caom2:bandpassName>
+                  </caom2:energy>
+                  <caom2:polarization>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>STOKES</caom2:ctype>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>1.0</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>1.0</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:polarization>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
         </caom2:artifact>
-        <caom2:artifact caom2:id="00000000-0000-0000-5a68-0140be32c64a" caom2:lastModified="2017-10-13T20:51:42.863" caom2:maxLastModified="2017-10-13T20:51:42.863" caom2:metaChecksum="md5:5fae9a7c8822366f8db56edc1df3734f" caom2:accMetaChecksum="md5:e9245b8505114b39141c9fd9a7ddf60a">
-          <caom2:uri>ad:CGPS/CGPS_MD1_100_um_fwhm.txt</caom2:uri>
+        <caom2:artifact caom2:id="00000000-0000-0000-90fe-0f601e4d9dcb">
+          <caom2:uri>ad:CGPS/CGPS_MD1_012_um_cfv.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:63e0679b22ab4a30152747bdbb3e535e</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-a6ef-8b3e5e387ae6">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-9d4e-89080c9e7a00">
+                  <caom2:naxis>2</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999999</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999999</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
+      </caom2:artifacts>
+    </caom2:plane>
+    <caom2:plane caom2:id="00000000-0000-0000-9d94-3efff2af231a">
+      <caom2:productID>25um</caom2:productID>
+      <caom2:metaRelease>2000-01-01T00:00:00.000</caom2:metaRelease>
+      <caom2:dataRelease>2000-01-01T00:00:00.000</caom2:dataRelease>
+      <caom2:dataProductType>image</caom2:dataProductType>
+      <caom2:calibrationLevel>2</caom2:calibrationLevel>
+      <caom2:provenance>
+        <caom2:name>CGPS MOSAIC HIRES</caom2:name>
+        <caom2:project>CGPS</caom2:project>
+        <caom2:producer>CGPS Consortium</caom2:producer>
+        <caom2:reference>http://dx.doi.org/10.1086/375301</caom2:reference>
+        <caom2:lastExecuted>2000-11-09T00:00:00.000</caom2:lastExecuted>
+      </caom2:provenance>
+      <caom2:artifacts>
+        <caom2:artifact caom2:id="00000000-0000-0000-985e-3fae5864350c">
+          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_beams.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:95ae5e472e0af5ce370a9a9f2cd55a75</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-b3e1-fa763f81d2f7">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-87a5-4300d00117a0">
+                  <caom2:naxis>2</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999999</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999999</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
+        <caom2:artifact caom2:id="00000000-0000-0000-9637-40178c10b611">
+          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_cfv.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:e1f09ed23cb587a9e207d2325c28370b</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-959f-ef45709ad504">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-b5b0-5555cbae1e02">
+                  <caom2:naxis>2</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999999</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999999</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
+        <caom2:artifact caom2:id="00000000-0000-0000-be28-311a35c8fd10">
+          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_image.fits</caom2:uri>
           <caom2:productType>science</caom2:productType>
           <caom2:releaseType>data</caom2:releaseType>
-          <caom2:contentType>text/plain</caom2:contentType>
-          <caom2:contentLength>60188</caom2:contentLength>
-          <caom2:contentChecksum>md5:c28a09dfca60d41614ee6d5fffe6139f</caom2:contentChecksum>
-          <caom2:parts/>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:106e7d174482906d8acf5844493bd274</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-b55f-d360d7401875">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-808e-d927835076b7">
+                  <caom2:naxis>4</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:energyAxis>3</caom2:energyAxis>
+                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999999</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999999</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                  <caom2:energy>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>WAVE</caom2:ctype>
+                        <caom2:cunit>m</caom2:cunit>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>1.115e-05</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>2.5e-05</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                    <caom2:specsys>TOPOCENT</caom2:specsys>
+                    <caom2:bandpassName>IRAS-25um</caom2:bandpassName>
+                  </caom2:energy>
+                  <caom2:polarization>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>STOKES</caom2:ctype>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>1.0</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>1.0</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:polarization>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
+        </caom2:artifact>
+        <caom2:artifact caom2:id="00000000-0000-0000-abed-98260ec38d3d">
+          <caom2:uri>ad:CGPS/CGPS_MD1_025_um_phn.fits</caom2:uri>
+          <caom2:productType>auxiliary</caom2:productType>
+          <caom2:releaseType>data</caom2:releaseType>
+          <caom2:contentType>application/fits</caom2:contentType>
+          <caom2:contentLength>4204800</caom2:contentLength>
+          <caom2:contentChecksum>md5:ed4f555194fa79857efe1bf8d0929cca</caom2:contentChecksum>
+          <caom2:parts>
+            <caom2:part caom2:id="00000000-0000-0000-8631-f74cb9796975">
+              <caom2:name>0</caom2:name>
+              <caom2:chunks>
+                <caom2:chunk caom2:id="00000000-0000-0000-acdc-b861244270b2">
+                  <caom2:naxis>3</caom2:naxis>
+                  <caom2:positionAxis1>1</caom2:positionAxis1>
+                  <caom2:positionAxis2>2</caom2:positionAxis2>
+                  <caom2:polarizationAxis>4</caom2:polarizationAxis>
+                  <caom2:position>
+                    <caom2:axis>
+                      <caom2:axis1>
+                        <caom2:ctype>GLON-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis1>
+                      <caom2:axis2>
+                        <caom2:ctype>GLAT-CAR</caom2:ctype>
+                        <caom2:cunit>deg</caom2:cunit>
+                      </caom2:axis2>
+                      <caom2:function>
+                        <caom2:dimension>
+                          <caom2:naxis1>1024</caom2:naxis1>
+                          <caom2:naxis2>1024</caom2:naxis2>
+                        </caom2:dimension>
+                        <caom2:refCoord>
+                          <caom2:coord1>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>116.7499990956</caom2:val>
+                          </caom2:coord1>
+                          <caom2:coord2>
+                            <caom2:pix>513.0</caom2:pix>
+                            <caom2:val>-0.9999999922536</caom2:val>
+                          </caom2:coord2>
+                        </caom2:refCoord>
+                        <caom2:cd11>-0.0049999999</caom2:cd11>
+                        <caom2:cd12>0.0</caom2:cd12>
+                        <caom2:cd21>0.0</caom2:cd21>
+                        <caom2:cd22>0.0049999999</caom2:cd22>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:position>
+                  <caom2:polarization>
+                    <caom2:axis>
+                      <caom2:axis>
+                        <caom2:ctype>STOKES</caom2:ctype>
+                      </caom2:axis>
+                      <caom2:function>
+                        <caom2:naxis>1</caom2:naxis>
+                        <caom2:delta>1.0</caom2:delta>
+                        <caom2:refCoord>
+                          <caom2:pix>1.0</caom2:pix>
+                          <caom2:val>1.0</caom2:val>
+                        </caom2:refCoord>
+                      </caom2:function>
+                    </caom2:axis>
+                  </caom2:polarization>
+                </caom2:chunk>
+              </caom2:chunks>
+            </caom2:part>
+          </caom2:parts>
         </caom2:artifact>
       </caom2:artifacts>
     </caom2:plane>

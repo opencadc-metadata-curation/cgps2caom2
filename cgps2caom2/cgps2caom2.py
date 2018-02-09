@@ -137,11 +137,12 @@ ENERGY = {'1420MHz': {'Chunk.position.axis.axis1.cunit': 'deg',  # CUNIT1
                         'Chunk.energy.axis.axis.ctype': 'VRAD',  # CTYPE3
                         'Chunk.energy.axis.axis.cunit': 'm/s',  # CUNIT3
                         'Chunk.energy.specsys': 'TOPOCENT'},  # SPECSYS
-          '21cm-lineWithCont': {'Chunk.position.axis.axis1.cunit': 'deg',  # CUNIT1
-                                'Chunk.position.axis.axis2.cunit': 'deg',  # CUNIT2
-                                'Chunk.energy.axis.axis.ctype': 'VRAD',  # CTYPE3
-                                'Chunk.energy.axis.axis.cunit': 'm/s',  # CUNIT3
-                                'Chunk.energy.specsys': 'LSRK'}  # SPECSYS
+          '21cm-lineWithCont':
+              {'Chunk.position.axis.axis1.cunit': 'deg',  # CUNIT1
+               'Chunk.position.axis.axis2.cunit': 'deg',  # CUNIT2
+               'Chunk.energy.axis.axis.ctype': 'VRAD',  # CTYPE3
+               'Chunk.energy.axis.axis.cunit': 'm/s',  # CUNIT3
+               'Chunk.energy.specsys': 'LSRK'}  # SPECSYS
           }
 
 POLARIZATION = {
@@ -222,7 +223,7 @@ def _cgps_make_file_id(basename):
 def _set_common(bp, headers, telescope, target, collection):
     """
     Set the blueprint elements that are the same between
-    a catalog-based plane and other plane types.
+    a catalog-based plane and other planes.
     """
     bp.set('Observation.observationID',
            '{}_{}'.format(target, telescope).upper())
@@ -290,13 +291,16 @@ def _set_fits(bp, lookup):
 
 def _metadata_from(bp, headers, uri, local, cert):
     """
-    Archive-specific method to fill the blueprint from the file header.
+    Archive-specific method to fill the blueprint based on the content and
+    structure of a file header.
 
     :param: bp blueprint
     :param: headers Headers from a FITS file.
     :param: uri the ad (? TBC) URI for the header
-    :param: file_name The file name on disk - used to figure out the image
-    file paired with an fwhm file.
+    :param: local file names on disk. Passed through to
+        _get_associated_image_headers as required.
+    :param: cert X509 certificte for retrieving proprietary data and metadata.
+        Passed through to _get_associated_image_headers as required.
     """
 
     file_id = uri.split('/')[1]  # TODO get from header
@@ -409,12 +413,19 @@ def _metadata_from(bp, headers, uri, local, cert):
             bp.set('Artifact.productType', product_type)
 
             # Per Pat Dowler/Chris Willot Feb 2/17, ignore the third and
-            # fourth axes if they are not correctly WCS, and repair naxes
-            # count accordingly.
+            # fourth axes if they are not correctly identified as WCS, and
+            # repair naxes count accordingly.
             #
             bp.set('Chunk.naxis', bp.get_configed_axes_count())
 
     elif content == 'fwhm':
+        # build up a separate blueprint for the catalog files, because they are
+        # their own plane/artifact collection in a CGPS observation
+
+        # fwhm files are text files without FITS headers,
+        # but the required metadata can be extracted from the corresponding
+        # image file
+
         global catalog_uri
         catalog_uri = uri
         bp.set('Plane.dataProductType', DataProductType.CATALOG)
@@ -423,9 +434,6 @@ def _metadata_from(bp, headers, uri, local, cert):
         catalog_blueprint.set('Plane.productID', 'catalog')
         bp.set('Artifact.productType', 'science')
 
-        # fwhm files are text files without FITS headers,
-        # but the required metadata can be extracted from the corresponding
-        # image file
         headers = _get_associated_image_headers(uri, local, cert)
         _set_common(bp, headers, telescope, target, collection)
 
@@ -441,6 +449,12 @@ def _metadata_from(bp, headers, uri, local, cert):
 
 
 def _set_defaults_and_overrides(bp):
+    """
+    From the .config, .default, .defaults, and .override files for the Java
+    version of cgps2caom2.
+
+    :param bp: ObsBlueprint to modify with default and ovverides.
+    """
     # from the cgps.config file
     bp.set_fits_attribute('Plane.provenance.lastExecuted', ['DATE-FTS'])
     # from the cgps.default file
@@ -459,6 +473,19 @@ def _set_defaults_and_overrides(bp):
 
 
 def _get_associated_image_headers(uri, local, cert):
+    """
+    fwhm files are text files without FITS headers,
+    but the required metadata can be extracted from the corresponding
+    image file, so figure out the image file name, and get the headers
+    from that file.
+
+    :param uri: The fwhm URI name.
+    :param local: The list of files that are on local disk, if they exist.
+        Passed through to _get_headers.
+    :param cert: X509 cert, required if relying on CADC services to
+        query proprietary header information. Passed through to _get_headers.
+    :return: headers from the image file
+    """
     image_uri = uri.replace('_fwhm.txt', '_image.fits')
     index = 0
     if local:
@@ -466,12 +493,23 @@ def _get_associated_image_headers(uri, local, cert):
         for key, value in enumerate(local):
             if value.find(fname) != -1:
                 index = key
-                print('key {} value {} index {}'.format(key, value, index))
                 break
     return _get_headers(image_uri, local, index, cert)
 
 
 def _get_headers(uri, local, index, cert):
+    """
+    Get header information. May be from local files on disk, may be from a
+    CADC service, depending on the input parameters to the method.
+
+    :param uri: Which URI to get headers for.
+    :param local: A list of files, or headers, if this information exists on
+        disk.
+    :param index: The index into the list of files for the appropriate file.
+    :param cert: An X509 certificate for accessing proprietary metadata or
+        data from a CADC service.
+    :return: The astropy header structure resulting from a fits file read.
+    """
     if uri.find('_fwhm') == -1:
         if local:
             file = local[index]
@@ -484,6 +522,17 @@ def _get_headers(uri, local, index, cert):
 
 
 def draw_cgps_blueprint(uri, headers, local, cert):
+    """
+    Modify an ObsBlueprint instance.
+
+    :param uri: Which URI defines the structure of the blueprint.
+    :param headers:  astropy headers structure containing the metadata for
+        the subject of blueprint construction.
+    :param local: Files on disk, conditionally.
+    :param cert:  X509 certificate for accessing proprietary metadata from
+        CADC services.
+    :return: The blueprint, customized according to the input data.
+    """
     logging.debug('Begin blueprint customization for CGPS {}.'.format(uri))
     blueprint = ObsBlueprint()
 
@@ -496,13 +545,14 @@ def draw_cgps_blueprint(uri, headers, local, cert):
 
 def main_app():
 
+    # assumes the execution is organized by collections of files that make up
+    # an observation
+
     args = get_arg_parser().parse_args()
     blueprints = {}
     for i, uri in enumerate(args.fileURI):
-        logging.debug('Begin processing for {}'.format(uri))
+        logging.debug('Begin customization for {}'.format(uri))
         headers = _get_headers(uri, args.local, i, args.cert)
-        # print(repr(headers))
-        print('draw blueprint for uri {}'.format(uri))
         blueprint = draw_cgps_blueprint(uri, headers, args.local, args.cert)
         blueprints[uri] = blueprint
 
@@ -510,4 +560,5 @@ def main_app():
         blueprints[catalog_uri] = catalog_blueprint
 
     proc(args, blueprints)
-    logging.debug('Done processing for {}'.format(args.observation[1]))
+    logging.debug(
+        'Done fitscaom2 processing for {}'.format(args.observation[1]))
