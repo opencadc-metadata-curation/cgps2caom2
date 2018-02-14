@@ -126,7 +126,7 @@ ENTRYPOINT ["./docker-entrypoint.sh"]
 # How cgps2caom2 organizes DRAO Observations into CAOM2 Observations (Russell Redmond)
 
 1. CGPS data
----
+-------------
 
 The CGPS archive contains files from 3 observatories:
 * DRAO ST 408 and 1420 continuum and H I 21cm datacubes
@@ -215,7 +215,7 @@ These all need to be ingested into the same CAOM database.  They have a common f
  The field prov_output.version is always 1.
 
 2. VGPS data
----
+------------
 
  The VGPS data is not recorded in a database.  The interface is hard-coded in html.  It should be straight-forward to ingest these files into the cgps database in caom, setting the collection to CGPS or VGPS appropriately.
 
