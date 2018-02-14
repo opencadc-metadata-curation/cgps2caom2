@@ -126,6 +126,7 @@ ENTRYPOINT ["./docker-entrypoint.sh"]
 # How cgps2caom2 organizes DRAO Observations into CAOM2 Observations (Russell Redmond)
 
 1. CGPS data
+---
 
 The CGPS archive contains files from 3 observatories:
 * DRAO ST 408 and 1420 continuum and H I 21cm datacubes
@@ -135,6 +136,7 @@ The CGPS archive contains files from 3 observatories:
 These all need to be ingested into the same CAOM database.  They have a common file format, which is discussed in the next sections.
 
 1.1. OBSERVATION
+---
 
  There is no raw data in the archive, so all observations are simple.
 
@@ -163,6 +165,7 @@ These all need to be ingested into the same CAOM database.  They have a common f
     "MEV1_408_DRAO_ST"
 
 1.2. PLANES
+---
 
  Release date is given in PUB_RELD for CGPS data.  There is no corresponding date in the VGPS headers, but DATE-OBS can be used because the data are all public now.
 
@@ -178,6 +181,7 @@ These all need to be ingested into the same CAOM database.  They have a common f
      else leave NULL
 
 1.3. ARTIFACTS
+---
 
  There is no indication of how long the observations took.  Note that DATE-OBS is nominally the mean date of the observation, in spite of the FITS standard that indicates it should be the starting datetime.
 
@@ -190,6 +194,7 @@ These all need to be ingested into the same CAOM database.  They have a common f
  The fourth (polarization) axis is defined for all file types, but the ADC_POLR header is defined only for a few of them.  It is probably safest to leave the CAOM polarization structure undefined except when this header is defined.
 
 1.4. PROCESSING
+---
 
  Each plane should have its own process, recording the date the processing ran.
 
@@ -210,12 +215,14 @@ These all need to be ingested into the same CAOM database.  They have a common f
  The field prov_output.version is always 1.
 
 2. VGPS data
+---
 
  The VGPS data is not recorded in a database.  The interface is hard-coded in html.  It should be straight-forward to ingest these files into the cgps database in caom, setting the collection to CGPS or VGPS appropriately.
 
  Each target has three associated files (artifacts), each of which will sit in its own plane.  File structure is similar to the CGPS, but 3-D rather than 4-D (no polarization).  There are fewer program headers in the files.  The ADC headers in particular are missing.  Some of the headers have different names, so the associated metadata will need to be handled through the override file.
 
 2.1. OBSERVATIONS
+---
 
  As for CGPS, INSTRUME identifies the telescope (VLA).
 
@@ -232,6 +239,7 @@ These all need to be ingested into the same CAOM database.  They have a common f
  The target classification is always 'FIELD'.
 
 2.2. PLANES
+---
 
  There is no explicit release date for the VGPS data, but DATE-OBS can be used because the data are all public now.
 
@@ -242,6 +250,7 @@ These all need to be ingested into the same CAOM database.  They have a common f
  The BUNIT header is always 'K', correct for these data.
 
 2.3. ARTIFACTS
+---
 
  There is no indication of how long the observations took.  For the VGPS data,  DATE-OBS seems more reliable than for the CGPS data, but it remains unclear whether it is the start, mean or end time of the observations.  As for the CGPS data, we will omit time structures.
 
@@ -252,6 +261,7 @@ These all need to be ingested into the same CAOM database.  They have a common f
  The fourth (polarization) axis is nominally defined as I, but it is unclear whether this is measured as part of a polarization observation, or merely assumed.  The polarization structure will be left undefined.
 
 2.4. PROCESSING
+---
 
  Each plane should have its own process, chiefly to record the date the processing ran. The processing name is contained in the ORIGIN keyword.  Note that this is different from the CGPS.
 
