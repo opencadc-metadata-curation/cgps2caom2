@@ -7,19 +7,13 @@ from __future__ import (absolute_import, division, print_function,
 
 __all__ = ['main_app', 'draw_cgps_blueprint']
 
-from astropy.io import fits
+from caom2 import CalibrationLevel, ReleaseType, DataProductType
+from caom2utils import ObsBlueprint, get_arg_parser, get_cadc_headers, proc
 
-from . import version
-from caom2 import CalibrationLevel, ObservationWriter, SimpleObservation
-from caom2 import Algorithm, ReleaseType, DataProductType
-from caom2utils import ObsBlueprint, FitsParser, get_arg_parser, get_cadc_headers, proc, POLARIZATION_CTYPES
-
-import argparse
 import logging
 import math
 import os
 import re
-import sys
 
 
 APP_NAME = 'cgps2caom2'
