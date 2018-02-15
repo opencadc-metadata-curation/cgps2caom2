@@ -100,13 +100,13 @@ COPY ./docker-entrypoint.sh ./
 ENTRYPOINT ["./docker-entrypoint.sh"]
 </pre>
 
-* run the build (tagged with the name cgps2caom2-363):
+* run the build (tagged with the name cgps2caom2-36):
 
-<pre>docker build -t cgps2caom2-363 -f Dockerfile ./</pre>
+<pre>docker build -t cgps2caom2-36 -f Dockerfile ./</pre>
 
-* run the application, using the docker image tagged with the name cgps2caom2-363:
+* run the application, using the docker image tagged with the name cgps2caom2-36:
 
-<pre>docker run --rm -ti cgps2caom2-363 cgps2caom2 &lt;arguments&gt;
+<pre>docker run --rm -ti cgps2caom2-36 cgps2caom2 &lt;arguments&gt;
 </pre>
 
 ### Test the application
@@ -117,8 +117,8 @@ ENTRYPOINT ["./docker-entrypoint.sh"]
 
 * or run the application using docker, with no mount required
 
-<pre>docker run --rm -ti cgps2caom2-363 cgps2caom2 --observation CGPS MC5_IRAS ignored_product_id ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>  
+<pre>docker run --rm -ti cgps2caom2-36 cgps2caom2 --observation CGPS MC5_IRAS ignored_product_id ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>  
 
 * run the application using docker, with a mount  
 
-<pre>docker run --rm -v &lt;cwd&gt;:/usr/src/app/test_data -ti cgps2caom2-363 cgps2caom2 --observation CGPS MC5_IRAS -o /usr/src/app/test_data/MC5_IRAS.actual.xml ignored_product_id ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>
+<pre>docker run --rm -v &lt;cwd&gt;:/usr/src/app/test_data -ti cgps2caom2-36 cgps2caom2 --observation CGPS MC5_IRAS -o /usr/src/app/test_data/MC5_IRAS.actual.xml ignored_product_id ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>
