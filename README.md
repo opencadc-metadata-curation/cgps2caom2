@@ -21,7 +21,7 @@ cgps2caom2 --debug --local /tmp/data/MD1_IRAS/CGPS_MD1_012_um_fwhm.txt /tmp/MD1_
 
 Use github until the pypi versons of the caom2 and caom2utils packages catch up with the latest work.
 
-Works with python 2.7, 3.6.3.
+Works with python 2.7, 3.6 (.3 and .4).
 
 <pre>
 git clone https://github.com/SharonGoliath/caom2tools &amp;&amp; \
@@ -84,7 +84,7 @@ $@
 
 <pre>
 # FROM python:2.7-jessie
-FROM python:3.6.3-jessie
+FROM python:3.6-jessie
 
 WORKDIR /usr/src/app
 
