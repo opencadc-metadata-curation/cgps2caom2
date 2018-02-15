@@ -115,11 +115,10 @@ ENTRYPOINT ["./docker-entrypoint.sh"]
 
 <pre>cgps2caom2 --observation CGPS MC5_IRAS -o ./MC5_408.actual.xml ignored_product_id ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>
 
-* or run the application using docker:
+* or run the application using docker, with no mount required
 
-  * no mount required
 <pre>docker run --rm -ti cgps2caom2-363 cgps2caom2 --observation CGPS MC5_IRAS ignored_product_id ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>  
 
-  * with a mount
-  
+* run the application using docker, with a mount  
+
 <pre>docker run --rm -v &lt;cwd&gt;:/usr/src/app/test_data -ti cgps2caom2-363 cgps2caom2 --observation CGPS MC5_IRAS -o /usr/src/app/test_data/MC5_IRAS.actual.xml ignored_product_id ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>
