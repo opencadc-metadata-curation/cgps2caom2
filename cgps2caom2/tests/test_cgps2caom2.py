@@ -38,7 +38,6 @@ def test_draw():
 
 @pytest.mark.parametrize('test_name', ['MC2_DRAO-ST', 'MC2_FCRAO', 'MD1_IRAS'])
 def test_main_app(test_name):
-    product_id = 'ignored_product_id'
     location = os.path.join(TESTDATA_DIR, test_name)
     actual_file_name = os.path.join(location, '{}.actual.xml'.format(test_name))
     files = ' '.join(
@@ -48,8 +47,8 @@ def test_main_app(test_name):
         ['ad:CGPS/{}'.format(name.split('.header')[0]) for name in
          os.listdir(location) if name.endswith('header')])
     sys.argv = \
-        ('cgps2caom2 --debug --local {} --observation CGPS {} -o {} {} {}'.
-         format(files, test_name, actual_file_name, product_id, uris)).split()
+        ('cgps2caom2 --local {} --observation CGPS {} -o {} {}'.
+         format(files, test_name, actual_file_name, uris)).split()
     main_app()
     expected = _read_obs(os.path.join(location, '{}.xml'.format(test_name)))
     actual = _read_obs(actual_file_name)

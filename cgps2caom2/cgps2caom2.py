@@ -380,6 +380,7 @@ def _metadata_from(bp, headers, uri, local, cert):
                 bp.set_fits_attribute('Chunk.energy.restfrq', ['FREQ0'])
             bp.set('Chunk.energy.bandpassName', bandpass_name)
 
+            data_product_type = 'image'
             if collection == 'VGPS' or content == 'image':
                 product_type = 'science'
 
@@ -390,7 +391,6 @@ def _metadata_from(bp, headers, uri, local, cert):
                 # NOT mean the file contains an image!
                 # Also, only the science artifact determines the
                 #  data_product_type.
-                data_product_type = ''
                 if 'NAXIS' in hdu0:
                     naxis = hdu0.get('NAXIS')
                     if (naxis == 2 or
@@ -400,11 +400,16 @@ def _metadata_from(bp, headers, uri, local, cert):
                         data_product_type = 'cube'
                 else:
                     data_product_type = 'catalog'
-                bp.set('Plane.dataProductType', data_product_type)
 
             else:
                 product_type = 'auxiliary'
+
+            if (telescope == 'DRAO-ST' and product_id == 'HI-line') or \
+                    (telescope == 'FCRAO' and product_id == 'CO-line'):
+                data_product_type = 'cube'
+
             bp.set('Artifact.productType', product_type)
+            bp.set('Plane.dataProductType', data_product_type)
 
             # Per Pat Dowler/Chris Willot Feb 2/17, ignore the third and
             # fourth axes if they are not correctly identified as WCS, and
