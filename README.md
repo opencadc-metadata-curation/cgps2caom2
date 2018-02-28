@@ -108,7 +108,7 @@ ENTRYPOINT ["./docker-entrypoint.sh"]
 
 * or run the application using docker, with no mount required
 
-<pre>docker run --rm -ti cgps2caom2-363 cgps2caom2 --observation CGPS MC5_IRAS ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>  
+<pre>docker run --rm -ti cgps2caom2-36 cgps2caom2 --observation CGPS MC5_IRAS ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>  
 
 * run the application using docker, with a mount  
   
