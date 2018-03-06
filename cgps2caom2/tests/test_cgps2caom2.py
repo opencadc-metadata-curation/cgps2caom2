@@ -29,7 +29,8 @@ def test_draw():
     assert test_blueprint._plan['Observation.telescope.name'] == 'DRAO-ST'
     assert test_blueprint._plan['Chunk.energy.specsys'] == 'TOPOCENT'
     assert test_blueprint._plan['Chunk.position.axis.axis1.cunit'] == 'deg'
-    assert test_blueprint._plan['Chunk.polarization.axis.function.delta'] == '1'
+    assert test_blueprint._plan['Chunk.polarization.axis.function.delta'] == \
+        '1'
     assert test_blueprint._plan['Chunk.energy.restfrq'] == (['OBSFREQ'], None)
     assert test_blueprint._plan['Observation.intent'] == 'science'
     assert test_blueprint._plan['Plane.provenance.lastExecuted'] == (
@@ -39,7 +40,8 @@ def test_draw():
 @pytest.mark.parametrize('test_name', ['MC2_DRAO-ST', 'MC2_FCRAO', 'MD1_IRAS'])
 def test_main_app(test_name):
     location = os.path.join(TESTDATA_DIR, test_name)
-    actual_file_name = os.path.join(location, '{}.actual.xml'.format(test_name))
+    actual_file_name = os.path.join(
+        location, '{}.actual.xml'.format(test_name))
     files = ' '.join(
         [os.path.join(location, name) for name in os.listdir(location) if
          name.endswith('header')])

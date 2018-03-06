@@ -80,7 +80,8 @@ ENERGY = {'1420MHz': {'Chunk.position.axis.axis1.cunit': 'deg',  # CUNIT1
           '1420MHz-QU': {'Chunk.position.axis.axis1.cunit': 'deg',  # CUNIT1
                          'Chunk.position.axis.axis2.cunit': 'deg',  # CUNIT2
                          'Chunk.energy.axis.axis.cunit': 'Hz',  # CUNIT3
-                         'Chunk.energy.axis.function.delta': '30.0E6',  # CDELT3
+                         'Chunk.energy.axis.function.delta':
+                             '30.0E6',  # CDELT3
                          'Chunk.energy.specsys': 'TOPOCENT'},  # SPECSYS
           '408MHz': {'Chunk.position.axis.axis1.cunit': 'deg',  # CUNIT1
                      'Chunk.position.axis.axis2.cunit': 'deg',  # CUNIT2
@@ -248,7 +249,8 @@ def _set_common(bp, headers, telescope, target, collection):
     catalog_blueprint.set('Observation.metaRelease', release)
     catalog_blueprint.set('Plane.metaRelease', release)
     catalog_blueprint.set('Plane.dataRelease', release)
-    catalog_blueprint.set('Plane.calibrationLevel', CalibrationLevel.CALIBRATED)
+    catalog_blueprint.set('Plane.calibrationLevel',
+                          CalibrationLevel.CALIBRATED)
 
     if telescope in ('DRAO-ST', 'FCRAO'):
         provenance_name = '{} {}'.format(headers[0].get('ADC_ARCH'),
@@ -335,7 +337,8 @@ def _metadata_from(bp, headers, uri, local, cert):
         collection = 'CGPS'  # TODO how to set collection
 
     # Deal with FITS files first
-    if isinstance(headers, list) and len(headers) > 0 and 'INSTRUME' in headers[0]:
+    if (isinstance(headers, list) and len(headers) > 0 and
+            'INSTRUME' in headers[0]):
         hdu0 = headers[0]
         if telescope:
 
@@ -436,9 +439,8 @@ def _metadata_from(bp, headers, uri, local, cert):
         headers = _get_associated_image_headers(uri, local, cert)
         _set_common(bp, headers, telescope, target, collection)
 
-        plane_uri = 'caom:{}/{}/{}'.format(collection,
-                                           bp._get('Observation.observationID'),
-                                           product_id)
+        plane_uri = 'caom:{}/{}/{}'.format(
+            collection, bp._get('Observation.observationID'), product_id)
         inputs = catalog_blueprint._get('Plane.provenance.inputs')
         if inputs is None:
             inputs = plane_uri
@@ -538,7 +540,8 @@ def draw_cgps_blueprint(uri, headers, local, cert):
     _metadata_from(blueprint, headers, uri, local, cert)
     _set_defaults_and_overrides(blueprint)
 
-    logging.debug('Blueprint customatization complete for CGPS {}.'.format(uri))
+    logging.debug(
+        'Blueprint customatization complete for CGPS {}.'.format(uri))
     return blueprint
 
 
