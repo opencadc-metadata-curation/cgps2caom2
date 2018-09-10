@@ -10,7 +10,6 @@
   <caom2:target>
     <caom2:name>MD1</caom2:name>
     <caom2:type>field</caom2:type>
-    <caom2:standard>false</caom2:standard>
   </caom2:target>
   <caom2:telescope>
     <caom2:name>IRAS</caom2:name>

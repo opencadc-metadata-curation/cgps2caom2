@@ -5,15 +5,18 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 
-__all__ = ['main_app', 'draw_cgps_blueprint']
+__all__ = ['main_app', 'draw_cgps_blueprint', 'read_obs']
 
 from caom2 import CalibrationLevel, ReleaseType, DataProductType
+from caom2 import ObservationReader, Provenance, PlaneURI, ObservationWriter
 from caom2utils import ObsBlueprint, get_arg_parser, get_cadc_headers, proc
 
 import logging
 import math
 import os
 import re
+import sys
+import traceback
 
 
 APP_NAME = 'cgps2caom2'
@@ -377,10 +380,11 @@ def _metadata_from(bp, headers, uri, local, cert):
                 bp.configure_polarization_axis(4)
                 _set_fits(bp, POLARIZATION)
 
+            bp.clear('Chunk.energy.restfrq')
             if telescope in ('DRAO-ST', 'FCRAO'):
-                bp.set_fits_attribute('Chunk.energy.restfrq', ['OBSFREQ'])
+                bp.add_fits_attribute('Chunk.energy.restfrq', 'OBSFREQ')
             elif telescope == 'VLA':
-                bp.set_fits_attribute('Chunk.energy.restfrq', ['FREQ0'])
+                bp.add_fits_attribute('Chunk.energy.restfrq', 'FREQ0')
             bp.set('Chunk.energy.bandpassName', bandpass_name)
 
             data_product_type = 'image'
@@ -457,7 +461,7 @@ def _set_defaults_and_overrides(bp):
     :param bp: ObsBlueprint to modify with default and ovverides.
     """
     # from the cgps.config file
-    bp.set_fits_attribute('Plane.provenance.lastExecuted', ['DATE-FTS'])
+    bp.add_fits_attribute('Plane.provenance.lastExecuted', 'DATE-FTS')
     # from the cgps.default file
     bp.set_default('Observation.target.type', 'field')
     bp.set_default('Plane.provenance.project', 'CGPS')
@@ -522,6 +526,59 @@ def _get_headers(uri, local, index, cert):
     return headers
 
 
+def read_obs(fname):
+    assert os.path.exists(fname)
+    reader = ObservationReader(False)
+    result = reader.read(fname)
+    return result
+
+
+def _update_catalog_plane(obs):
+    logging.debug('Begin _update_catalog_plane for {}.'.format(catalog_uri))
+    assert obs is not None, 'Must have an observation to update'
+
+    for ii in obs.planes:
+        plane = obs.planes[ii]
+        if 'catalog' in plane.product_id:
+            plane.meta_release = obs.meta_release
+            plane.data_release = obs.meta_release
+            plane.data_product_type = DataProductType.CATALOG
+            plane.calibration_level = CalibrationLevel.CALIBRATED
+            plane.provenance = Provenance(
+                catalog_blueprint._get('Plane.provenance.name'))
+            plane.provenance.project = catalog_blueprint._get(
+                'Plane.provenance.project')[1]
+            plane.provenance.producer = catalog_blueprint._get(
+                'Plane.provenance.producer')
+            plane.provenance.reference = catalog_blueprint._get(
+                'Plane.provenance.reference')
+            inputs = catalog_blueprint._get('Plane.provenance.inputs')
+            if inputs:
+                for i in inputs.split():
+                    plane.provenance.inputs.add(PlaneURI(str(i)))
+    logging.debug('Done _update_catalog_plane for {}.'.format(catalog_uri))
+
+
+def _write_obs(obs, fname):
+    writer = ObservationWriter(True, False, 'caom2',
+                               'http://www.opencadc.org/caom2/xml/v2.3')
+    writer.write(obs, fname)
+
+
+def set_catalog_plane_information(args):
+    """Add custom metadata due to the catalog plane. Read in the generated
+    observation metadata from on disk, update the specific plane metadata,
+    and then write it back to the same file on disk."""
+    if catalog_uri is not None:
+        if args.out_obs_xml:
+            observation = read_obs(args.out_obs_xml)
+            _update_catalog_plane(observation)
+            _write_obs(observation, args.out_obs_xml)
+        else:
+            logging.error(
+                'Could not find the xml to augment for {}'.format(catalog_uri))
+
+
 def draw_cgps_blueprint(uri, headers, local, cert):
     """
     Modify an ObsBlueprint instance.
@@ -561,6 +618,13 @@ def main_app():
     if catalog_uri is not None:
         blueprints[catalog_uri] = catalog_blueprint
 
-    proc(args, blueprints)
+    try:
+        proc(args, blueprints)
+        set_catalog_plane_information(args)
+    except Exception as e:
+        logging.error(e)
+        tb = traceback.format_exc()
+        logging.debug(tb)
+        sys.exit(-1)
     logging.debug(
         'Done fitscaom2 processing for {}'.format(args.observation[1]))
