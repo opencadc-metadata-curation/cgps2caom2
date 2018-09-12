@@ -36,6 +36,28 @@ def test_draw():
     assert test_blueprint._plan['Plane.provenance.lastExecuted'] == (
         ['DATE-FTS'], None)
 
+# def test_time_max():
+#     hdr1 = fits.Header()
+#     hdr1['INSTRUME'] = 'TEST'
+#     hdr1['OBSFREQ'] = '1420406000.0'
+#
+#     test_blueprint = draw_cgps_blueprint(TEST_URI, [hdr1], local=False,
+#                                          cert=None)
+#     assert test_blueprint._plan['Observation.metaRelease'] == None, 'wrong release date'
+#     test_release = '2004-04-02'
+#     from cgps2caom2 import _set_max_observation_release_date
+#     _set_max_observation_release_date(test_blueprint, test_release)
+#     assert test_blueprint._plan['Observation.metaRelease'] == '2004-04-02', \
+#         'wrong release date 2'
+#     test_release = '2002-04-02'
+#     _set_max_observation_release_date(test_blueprint, test_release)
+#     assert test_blueprint._plan['Observation.metaRelease'] == '2004-04-02', \
+#         'wrong release date 3'
+#     test_release = '2012-04-02'
+#     _set_max_observation_release_date(test_blueprint, test_release)
+#     assert test_blueprint._plan['Observation.metaRelease'] == '2012-04-02', \
+#         'wrong release date 4'
+
 
 @pytest.mark.parametrize('test_name', ['MC2_DRAO-ST', 'MC2_FCRAO', 'MD1_IRAS'])
 def test_main_app(test_name):

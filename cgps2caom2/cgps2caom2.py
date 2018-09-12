@@ -200,6 +200,23 @@ LOCATIONS = {'IRAS': ('', '', ''),
                                  2124.0)}
 
 
+# def _set_max_observation_release_date(bp, new_release_date):
+#     current_release = bp._plan['Observation.metaRelease']
+#     if current_release is None:
+#         logging.error('setting none {}'.format(new_release_date))
+#         bp.set('Observation.metaRelease', new_release_date)
+#     else:
+#         if isinstance(current_release, str):
+#             current_time = Time(current_release)
+#             new_time = Time(new_release_date)
+#             if new_time > current_time:
+#                 logging.error('setting bigger {}'.format(new_release_date))
+#                 bp.set('Observation.metaRelease', new_release_date)
+#         else:
+#             logging.error('setting from default {} {} {}'.format(new_release_date, type(current_release), current_release))
+#             bp.set('Observation.metaRelease', new_release_date)
+#
+#
 def _cgps_make_file_id(basename):
     """
     CGPS-specific routine to convert a file basename (without the
