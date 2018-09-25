@@ -17,16 +17,6 @@ The cgps2caom2 application assumes that all files that make up a CGPS CAOM2 Obse
 cgps2caom2 --debug --local /tmp/data/MD1_IRAS/CGPS_MD1_012_um_fwhm.txt /tmp/MD1_IRAS/CGPS_MD1_060_um_phn.fits /tmp/MD1_IRAS/CGPS_MD1_100_um_fwhm.txt /tmp/MD1_IRAS/CGPS_MD1_100_um_phn.fits /tmp/MD1_IRAS/CGPS_MD1_100_um_cfv.fits /tmp/MD1_IRAS/CGPS_MD1_012_um_phn.fits /tmp/MD1_IRAS/CGPS_MD1_060_um_cfv.fits /tmp/MD1_IRAS/CGPS_MD1_100_um_beams.fits /tmp/MD1_IRAS/CGPS_MD1_060_um_image.fits /tmp/MD1_IRAS/CGPS_MD1_012_um_beams.fits /tmp/MD1_IRAS/CGPS_MD1_012_um_image.fits /tmp/MD1_IRAS/CGPS_MD1_060_um_beams.fits /tmp/MD1_IRAS/CGPS_MD1_100_um_image.fits /tmp/MD1_IRAS/CGPS_MD1_025_um_beams.fits /tmp/MD1_IRAS/CGPS_MD1_025_um_fwhm.txt /tmp/MD1_IRAS/CGPS_MD1_025_um_cfv.fits /tmp/MD1_IRAS/CGPS_MD1_025_um_image.fits /tmp/MD1_IRAS/CGPS_MD1_060_um_fwhm.txt /tmp/MD1_IRAS/CGPS_MD1_025_um_phn.fits /tmp/MD1_IRAS/CGPS_MD1_012_um_cfv.fits --observation CGPS MD1_IRAS -o /tmp/MD1_IRAS/MD1_IRAS.actual.xml ad:CGPS/CGPS_MD1_012_um_fwhm.txt ad:CGPS/CGPS_MD1_060_um_phn.fits ad:CGPS/CGPS_MD1_100_um_fwhm.txt ad:CGPS/CGPS_MD1_100_um_phn.fits ad:CGPS/CGPS_MD1_100_um_cfv.fits ad:CGPS/CGPS_MD1_012_um_phn.fits ad:CGPS/CGPS_MD1_060_um_cfv.fits ad:CGPS/CGPS_MD1_100_um_beams.fits ad:CGPS/CGPS_MD1_060_um_image.fits ad:CGPS/CGPS_MD1_012_um_beams.fits ad:CGPS/CGPS_MD1_012_um_image.fits ad:CGPS/CGPS_MD1_060_um_beams.fits ad:CGPS/CGPS_MD1_100_um_image.fits ad:CGPS/CGPS_MD1_025_um_beams.fits ad:CGPS/CGPS_MD1_025_um_fwhm.txt ad:CGPS/CGPS_MD1_025_um_cfv.fits ad:CGPS/CGPS_MD1_025_um_image.fits ad:CGPS/CGPS_MD1_060_um_fwhm.txt ad:CGPS/CGPS_MD1_025_um_phn.fits ad:CGPS/CGPS_MD1_012_um_cfv.fits
 </pre>
 
-## How to install this program
-
-Works with python 2.7, 3.6 (.3 and .4).
-
-<pre>
-pip install caom2 &amp;&amp; \
-  pip install caom2utils
-pip install git+https://github.com/SharonGoliath/cgps2caom2.git
-</pre>
-
 ## How to use this program
 
 <pre>
@@ -65,51 +55,28 @@ optional arguments:
   --productID PRODUCTID product ID of the plane in the observation
 </pre>
 
-### If you use docker
+### Use docker
 In an empty directory:
 
-* create a docker-entrypoint.sh file with owner-executable permissions:
-
-<pre>
-#!/usr/bin/env bash
-$@
-</pre>
+* copy the docker-entrypoint.sh file with owner-executable permissions
  
-* create a Dockerfile referencing your favourite python version (does not result in the smallest possible container):
+* copy the Dockerfile:
 
-<pre>
-# FROM python:2.7-jessie
-FROM python:3.6-jessie
+* run the build (tagged with the name cgps2caom2):
 
-WORKDIR /usr/src/app
+<pre>docker build -t cgps2caom2 -f Dockerfile ./</pre>
 
-RUN pip install caom2 &amp;&amp; pip install caom2utils
-RUN pip install git+https://github.com/SharonGoliath/cgps2caom2.git
+* run the application, using the docker image tagged with the name cgps2caom2:
 
-COPY ./docker-entrypoint.sh ./
-
-ENTRYPOINT ["./docker-entrypoint.sh"]
-</pre>
-
-* run the build (tagged with the name cgps2caom2-36):
-
-<pre>docker build -t cgps2caom2-36 -f Dockerfile ./</pre>
-
-* run the application, using the docker image tagged with the name cgps2caom2-36:
-
-<pre>docker run --rm -ti cgps2caom2-36 cgps2caom2 &lt;arguments&gt;
+<pre>docker run --rm -ti cgps2caom2 cgps2caom2 &lt;arguments&gt;
 </pre>
 
 ### Test the application
 
-* run the application:
+* run the application using docker, with no mount required
 
-<pre>cgps2caom2 --observation CGPS MC5_IRAS -o ./MC5_408.actual.xml ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>
-
-* or run the application using docker, with no mount required
-
-<pre>docker run --rm -ti cgps2caom2-36 cgps2caom2 --observation CGPS MC5_IRAS ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>  
+<pre>docker run --rm -ti cgps2caom2 cgps2caom2 --observation CGPS MC5_IRAS ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>  
 
 * run the application using docker, with a mount  
   
-<pre>docker run --rm -v &lt;cwd&gt;:/usr/src/app/test_data -ti cgps2caom2-36 cgps2caom2 --observation CGPS MC5_IRAS -o /usr/src/app/test_data/MC5_IRAS.actual.xml ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>
+<pre>docker run --rm -v &lt;cwd&gt;:/usr/src/app/test_data -ti cgps2caom2 cgps2caom2 --observation CGPS MC5_IRAS -o /usr/src/app/test_data/MC5_IRAS.actual.xml ad:CGPS/CGPS_MC5_408_MHz_image.fits</pre>
