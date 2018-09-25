@@ -5,11 +5,13 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 
-__all__ = ['main_app', 'draw_cgps_blueprint', 'read_obs']
+__all__ = ['main_app', 'draw_cgps_blueprint', 'read_obs',
+           'APPLICATION', 'COLLECTION']
 
 from caom2 import CalibrationLevel, ReleaseType, DataProductType
 from caom2 import ObservationReader, Provenance, PlaneURI, ObservationWriter
 from caom2utils import ObsBlueprint, get_arg_parser, get_cadc_headers, proc
+from caom2pipe import execute_composable as ec
 
 import logging
 import math
@@ -19,7 +21,19 @@ import sys
 import traceback
 
 
-APP_NAME = 'cgps2caom2'
+APPLICATION = 'cgps2caom2'
+COLLECTION = 'cgps'
+COLLECTION_PATTERN = '*'
+
+
+class CgpsName(ec.StorageName):
+    def __init__(self, obs_id=None, file_name=None):
+        super(CgpsName, self).__init__(obs_id, COLLECTION, COLLECTION_PATTERN)
+        self.file_name = file_name
+
+    def is_valid(self):
+        return True
+
 
 catalog_blueprint = ObsBlueprint()
 catalog_uri = None
