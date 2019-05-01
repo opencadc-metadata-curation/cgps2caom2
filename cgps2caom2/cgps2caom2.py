@@ -13,6 +13,8 @@ from caom2 import ObservationReader, Provenance, PlaneURI, ObservationWriter
 from caom2utils import ObsBlueprint, get_arg_parser, get_cadc_headers, proc
 from caom2pipe import execute_composable as ec
 
+from astropy.time import Time
+
 import logging
 import math
 import os
@@ -37,6 +39,7 @@ class CgpsName(ec.StorageName):
 
 catalog_blueprint = ObsBlueprint()
 catalog_uri = None
+max_release_date = None
 
 # Regular expressions for file_ids.  Note that these are all in lower
 # case as are CGPS file_ids, not mixed case as are CGPS file names.  The
@@ -214,23 +217,21 @@ LOCATIONS = {'IRAS': ('', '', ''),
                                  2124.0)}
 
 
-# def _set_max_observation_release_date(bp, new_release_date):
-#     current_release = bp._plan['Observation.metaRelease']
-#     if current_release is None:
-#         logging.error('setting none {}'.format(new_release_date))
-#         bp.set('Observation.metaRelease', new_release_date)
-#     else:
-#         if isinstance(current_release, str):
-#             current_time = Time(current_release)
-#             new_time = Time(new_release_date)
-#             if new_time > current_time:
-#                 logging.error('setting bigger {}'.format(new_release_date))
-#                 bp.set('Observation.metaRelease', new_release_date)
-#         else:
-#             logging.error('setting from default {} {} {}'.format(new_release_date, type(current_release), current_release))
-#             bp.set('Observation.metaRelease', new_release_date)
-#
-#
+def _set_max_observation_release_date(bp, candidate):
+    global max_release_date
+    if max_release_date is None:
+        max_release_date = candidate
+    else:
+        max_time = Time(max_release_date)
+        candidate_time = Time(candidate)
+        if candidate_time > max_time:
+            max_release_date = candidate
+    bp.set('Observation.metaRelease', max_release_date)
+    global catalog_blueprint
+    if catalog_blueprint is not None:
+        catalog_blueprint.set('Observation.metaRelease', max_release_date)
+
+
 def _cgps_make_file_id(basename):
     """
     CGPS-specific routine to convert a file basename (without the
@@ -275,12 +276,12 @@ def _set_common(bp, headers, telescope, target, collection):
     else:
         release = headers[0].get('DATE-OBS')
 
-    bp.set('Observation.metaRelease', release)
-    bp.set('Plane.metaRelease', release)
-    bp.set('Plane.dataRelease', release)
+    _set_max_observation_release_date(bp, release)
+    bp.set('Plane.metaRelease', max_release_date)
+    bp.set('Plane.dataRelease', max_release_date)
+
     bp.set('Plane.calibrationLevel', CalibrationLevel.CALIBRATED)
 
-    catalog_blueprint.set('Observation.metaRelease', release)
     catalog_blueprint.set('Plane.metaRelease', release)
     catalog_blueprint.set('Plane.dataRelease', release)
     catalog_blueprint.set('Plane.calibrationLevel',
@@ -359,8 +360,6 @@ def _metadata_from(bp, headers, uri, local, cert):
         bandpass_name = None
         content = None
 
-    # print('telescope {} target {} product id {} bandpass name {} content {}'.
-    #       format(telescope, target, product_id, bandpass_name, content))
     bp.set('Plane.productID', product_id)
     bp.set('Artifact.releaseType', ReleaseType.DATA)
 
@@ -637,6 +636,9 @@ def main_app():
 
     # assumes the execution is organized by collections of files that make up
     # an observation
+
+    global max_release_date
+    max_release_date = None
 
     args = get_arg_parser().parse_args()
     blueprints = {}

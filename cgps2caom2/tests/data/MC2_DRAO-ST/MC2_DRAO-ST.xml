@@ -527,8 +527,8 @@
     </caom2:plane>
     <caom2:plane caom2:id="00000000-0000-0000-a3f1-15b435d3bdbf">
       <caom2:productID>HI-line</caom2:productID>
-      <caom2:metaRelease>2001-04-04T00:00:00.000</caom2:metaRelease>
-      <caom2:dataRelease>2001-04-04T00:00:00.000</caom2:dataRelease>
+      <caom2:metaRelease>2011-01-01T00:00:00.000</caom2:metaRelease>
+      <caom2:dataRelease>2011-01-01T00:00:00.000</caom2:dataRelease>
       <caom2:dataProductType>cube</caom2:dataProductType>
       <caom2:calibrationLevel>2</caom2:calibrationLevel>
       <caom2:provenance>
@@ -1047,8 +1047,8 @@
     </caom2:plane>
     <caom2:plane caom2:id="00000000-0000-0000-be13-3e208060b21d">
       <caom2:productID>408MHz</caom2:productID>
-      <caom2:metaRelease>2003-01-01T00:00:00.000</caom2:metaRelease>
-      <caom2:dataRelease>2003-01-01T00:00:00.000</caom2:dataRelease>
+      <caom2:metaRelease>2011-01-01T00:00:00.000</caom2:metaRelease>
+      <caom2:dataRelease>2011-01-01T00:00:00.000</caom2:dataRelease>
       <caom2:dataProductType>image</caom2:dataProductType>
       <caom2:calibrationLevel>2</caom2:calibrationLevel>
       <caom2:provenance>
