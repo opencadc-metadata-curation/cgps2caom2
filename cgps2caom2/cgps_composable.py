@@ -77,9 +77,10 @@ meta_visitors = []
 
 
 def cgps_run():
-    proxy = '/usr/src/app/cadcproxy.pem'
-    ec.run_by_file(ec.StorageName, APPLICATION, COLLECTION, proxy,
-                   meta_visitors, data_visitors)
+    config = mc.Config()
+    config.get_executors()
+    ec.run_by_file(config, ec.StorageName, APPLICATION, meta_visitors, 
+                   data_visitors)
 
 
 def cgps_run_single():
