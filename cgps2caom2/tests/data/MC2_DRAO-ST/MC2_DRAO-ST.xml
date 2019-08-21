@@ -787,8 +787,8 @@
     </caom2:plane>
     <caom2:plane caom2:id="00000000-0000-0000-a85d-72ad4657062c">
       <caom2:productID>1420MHz</caom2:productID>
-      <caom2:metaRelease>2002-04-21T00:00:00.000</caom2:metaRelease>
-      <caom2:dataRelease>2002-04-21T00:00:00.000</caom2:dataRelease>
+      <caom2:metaRelease>2011-01-01T00:00:00.000</caom2:metaRelease>
+      <caom2:dataRelease>2011-01-01T00:00:00.000</caom2:dataRelease>
       <caom2:dataProductType>image</caom2:dataProductType>
       <caom2:calibrationLevel>2</caom2:calibrationLevel>
       <caom2:provenance>
