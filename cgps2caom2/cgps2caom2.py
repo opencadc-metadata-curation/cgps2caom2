@@ -11,7 +11,7 @@ __all__ = ['main_app', 'draw_cgps_blueprint', 'read_obs',
 from caom2 import CalibrationLevel, ReleaseType, DataProductType
 from caom2 import ObservationReader, Provenance, PlaneURI, ObservationWriter
 from caom2utils import ObsBlueprint, get_arg_parser, get_cadc_headers, proc
-from caom2pipe import execute_composable as ec
+from caom2pipe import manage_composable as mc
 
 from astropy.time import Time
 
@@ -28,7 +28,7 @@ COLLECTION = 'cgps'
 COLLECTION_PATTERN = '*'
 
 
-class CgpsName(ec.StorageName):
+class CgpsName(mc.StorageName):
     def __init__(self, obs_id=None, file_name=None):
         super(CgpsName, self).__init__(obs_id, COLLECTION, COLLECTION_PATTERN)
         self.file_name = file_name

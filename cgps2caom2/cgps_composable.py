@@ -70,7 +70,7 @@ import tempfile
 
 from caom2pipe import execute_composable as ec
 from caom2pipe import manage_composable as mc
-from cgps2caom2 import APPLICATION, COLLECTION
+from cgps2caom2 import APPLICATION
 
 data_visitors = []
 meta_visitors = []
@@ -79,7 +79,7 @@ meta_visitors = []
 def cgps_run():
     config = mc.Config()
     config.get_executors()
-    ec.run_by_file(config, ec.StorageName, APPLICATION, meta_visitors, 
+    ec.run_by_file(config, mc.StorageName, APPLICATION, meta_visitors,
                    data_visitors)
 
 
@@ -94,8 +94,8 @@ def cgps_run_single():
     else:
         config.proxy = sys.argv[2]
     if config.features.use_file_names:
-        storage_name = ec.StorageName(file_name=sys.argv[1])
+        storage_name = mc.StorageName(file_name=sys.argv[1])
     else:
-        storage_name = ec.StorageName(obs_id=sys.argv[1])
+        storage_name = mc.StorageName(obs_id=sys.argv[1])
     ec.run_single(config, storage_name, APPLICATION, meta_visitors,
                   data_visitors)
